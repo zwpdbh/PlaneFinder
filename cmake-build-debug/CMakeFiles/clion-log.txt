@@ -1,0 +1,4 @@
+"/Users/zw/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/171.4073.41/CLion.app/Contents/bin/cmake/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/zw/code/C++_Projects/PlaneFinder
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug
