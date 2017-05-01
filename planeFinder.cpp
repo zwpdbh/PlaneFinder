@@ -48,10 +48,10 @@ int main(int argc, char *argv[]) {
     // each planeSize holds the number of points = total / num of plane
     size_t planeSize = ply.size() / nPlanes;
 
-    for (size_t ix = 0; ix < ply.size(); ++ix) {
-        size_t planeIx = ix / planeSize;
-        size_t colourIx = planeIx % colours.size(); // May need to recycle colours
-        ply[ix].colour = colours[colourIx];
+    for (size_t index = 0; index < ply.size(); ++index) {
+        size_t indexInPlane = index / planeSize;
+        size_t colourIx = indexInPlane % colours.size(); // May need to recycle colours
+        ply[index].colour = colours[colourIx];
     }
 
     // Write the resulting (re-coloured) point cloud to a PLY file.
