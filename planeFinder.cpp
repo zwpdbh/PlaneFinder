@@ -10,15 +10,18 @@ using namespace std;
  * @param minNumOfSampleNeeded the minimum number of data to form my model, a plane need 3 data points
  */
 vector<PlyPoint> getRandomSampleFromDataPoints(vector<PlyPoint> dataPoints, int minNumOfSampleNeeded) {
+    cout << "Randomly get 3 points for my plane model." << endl;
     vector<PlyPoint> randomSample;
     vector<unsigned long> randomIndex;
     unsigned long size = dataPoints.size();
 
-    while (randomIndex.size() <= minNumOfSampleNeeded) {
+    int counter = 0;
+    while (counter <= minNumOfSampleNeeded) {
         unsigned long sampleIndex = rand() % size;
         // true if not present, false other wise
         if (find(randomIndex.begin(), randomIndex.end(), sampleIndex) == randomIndex.end()) {
             randomIndex.push_back(sampleIndex);
+            counter += 1;
         }
     }
 
@@ -45,7 +48,10 @@ vector<int> findPlaneDataPointViaRANSAC(vector<PlyPoint> dataPoints, double outl
     int totalSize = dataPoints.size();
     double evaluation = 0;
 
+    cout << "Number of trails needed is: " << trialsNeeded << endl;
+
     for (int i = 0; i < trialsNeeded; ++i) {
+        cout << "Trail: " << i << endl;
         // 1. get 3 random points for model my plane
         vector<PlyPoint> samples = getRandomSampleFromDataPoints(dataPoints, 3);
         Plane p(samples[0], samples[1], samples[2]);
@@ -60,18 +66,10 @@ vector<int> findPlaneDataPointViaRANSAC(vector<PlyPoint> dataPoints, double outl
         }
     }
 
+    cout << "return the plane points" << endl;
     return planePointsIndexes;
 }
 
-
-vector<int> restOfDataPointsAfterRemoveFittedPlane(vector<int> dataPoint, vector<int> planePoints) {
-    vector<int> rest;
-    for (int i = 0; i < dataPoint.size(); ++i) {
-
-    }
-
-    return rest;
-}
 
 int main(int argc, char *argv[]) {
 
@@ -130,12 +128,15 @@ int main(int argc, char *argv[]) {
 
     vector<vector<int>> planes;
 
-    for (int i = 0; i < nPlanes; ++i) {
+    for (int i = 0; i < 1; ++i) {
+        cout << "find the " << i << "th plane" << endl;
         vector<int> result = findPlaneDataPointViaRANSAC(dataSet, 0.65, 0.95, 0.1);
         planes.push_back(result);
 
         // remove the data that already fit some plane. use the rest point to find another plane
+        cout << "the plane has " << result.size() << " points" << endl;
         for (int j = 0; j < result.size(); ++j) {
+            cout << "deleting the fitted points" << endl;
             dataSet.erase(dataSet.begin() + result[j]);
         }
     }
@@ -147,7 +148,7 @@ int main(int argc, char *argv[]) {
 //        }
 //    }
 
-
+    cout << "updating the color" << endl;
 
     for (int k = 0; k < planes[0].size(); ++k) {
         ply[planes[0][k]].colour = colours[0];

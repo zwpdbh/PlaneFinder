@@ -5,6 +5,7 @@
 #include <iostream>
 #include <math.h>
 #include <Eigen/Core>
+#include <Eigen/Dense>
 
 using namespace std;
 
@@ -20,6 +21,9 @@ int main(int argc, char *argv[]) {
     cout << w[0] << endl;
     cout << w[1] << endl;
     cout << w[2] << endl;
+
+//    cout << u.cross3(v) << endl;
+    cout << u.cross(v) << endl;
 
     return 0;
 }

@@ -3,7 +3,7 @@
 //
 
 #include "Plane.h"
-
+#include <Eigen/Dense>
 using namespace std;
 
 Plane::Plane(PlyPoint p1, PlyPoint p2, PlyPoint p3) {
