@@ -13,7 +13,6 @@ CMakeFiles/planeFinder.dir/SimplePly.cpp.o: ../SimplePly.cpp
 CMakeFiles/planeFinder.dir/SimplePly.cpp.o: ../SimplePly.h
 CMakeFiles/planeFinder.dir/SimplePly.cpp.o: ../rply.h
 
-CMakeFiles/planeFinder.dir/planeFinder.cpp.o: ../Plane.h
 CMakeFiles/planeFinder.dir/planeFinder.cpp.o: ../SimplePly.h
 CMakeFiles/planeFinder.dir/planeFinder.cpp.o: ../planeFinder.cpp
 

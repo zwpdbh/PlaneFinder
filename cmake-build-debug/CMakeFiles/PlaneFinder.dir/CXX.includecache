@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.cpp
+Plane.h
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
+Eigen/Dense
+-
+
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
+SimplePly.h
+/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
+
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp
 SimplePly.h
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h

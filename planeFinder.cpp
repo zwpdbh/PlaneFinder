@@ -50,7 +50,10 @@ int main(int argc, char *argv[]) {
         currentDataSetIndexes.push_back(k);
     }
 
-
+    std::vector<Eigen::Vector3i> colours;
+    colours.push_back(Eigen::Vector3i(255, 0, 0));
+    colours.push_back(Eigen::Vector3i(0, 255, 0));
+    colours.push_back(Eigen::Vector3i(0, 0, 255));
 
     for (int i = 0; i < 1; ++i) {
         vector<long> bestInliers;
@@ -108,37 +111,17 @@ int main(int argc, char *argv[]) {
 
         } // end of repeat tails
 
-        // output best plane
-        Eigen::Vector3i colour(255, 0, 0);
+
+        // update plane color
         for (int k = 0; k < bestInliers.size(); ++k) {
             long index = bestInliers[k];
-            ply[index].colour = colour;
+            ply[index].colour = colours[i];
         }
 
         // update data set, find next plane in the rest data set
 
     }
 
-
-//    // update color stuff
-//
-//    // Recolour points - here we are just doing colour based on index
-//    std::cout << "Recolouring points" << std::endl;
-//    std::vector<Eigen::Vector3i> colours;
-//    colours.push_back(Eigen::Vector3i(255, 0, 0));
-//    colours.push_back(Eigen::Vector3i(0, 255, 0));
-//    colours.push_back(Eigen::Vector3i(0, 0, 255));
-//    // Can add more colours as needed
-//
-//    // each planeSize holds the number of points = total / num of plane
-//    size_t planeSize = ply.size() / nPlanes;
-//
-//    for (size_t index = 0; index < ply.size(); ++index) {
-//        size_t indexInPlane = index / planeSize;
-//        size_t colourIx = indexInPlane % colours.size(); // May need to recycle colours
-//        ply[index].colour = colours[colourIx];
-//    }
-//
     // Write the resulting (re-coloured) point cloud to a PLY file.
     std::cout << "Writing PLY data to " << outputFile << std::endl;
     if (!ply.write(outputFile)) {
