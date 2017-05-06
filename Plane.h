@@ -22,7 +22,6 @@ private:
     Eigen::Vector3d normalized;
     Eigen::Vector3d v0;
     double distanceToThisPlane(PlyPoint p0);
-    std::vector<int> indexOfInliers;
 };
 
 

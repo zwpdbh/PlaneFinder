@@ -1,5 +1,4 @@
 #include <iostream>
-#include "SimplePly.h"
 #include "Plane.h"
 
 
@@ -31,7 +30,7 @@ vector<PlyPoint> getRandomSampleFromDataPoints(vector<PlyPoint> dataPoints, int 
 
 
 /**
- * Use RANSAC to fit a plane, return all the inlier points of a plane
+ * Use RANSAC to fit a plane, return all the inlier points indexes of a plane
  * @param dataPoints the data will be fit
  * @param outlierRatio the prior probability of outlier in data
  * @param successfulProbability the expected successful probability to find a good fit
@@ -60,8 +59,18 @@ vector<int> findPlaneDataPointViaRANSAC(vector<PlyPoint> dataPoints, double outl
             planePointsIndexes = inliers;
         }
     }
-    
+
     return planePointsIndexes;
+}
+
+
+vector<int> restOfDataPointsAfterRemoveFittedPlane(vector<int> dataPoint, vector<int> planePoints) {
+    vector<int> rest;
+    for (int i = 0; i < dataPoint.size(); ++i) {
+
+    }
+
+    return rest;
 }
 
 int main(int argc, char *argv[]) {
@@ -114,6 +123,35 @@ int main(int argc, char *argv[]) {
 //        ply[index].colour = colours[colourIx];
 //    }
 
+    vector<PlyPoint> dataSet;
+    for (size_t j = 0; j < ply.size(); ++j) {
+        dataSet.push_back(ply[j]);
+    }
+
+    vector<vector<int>> planes;
+
+    for (int i = 0; i < nPlanes; ++i) {
+        vector<int> result = findPlaneDataPointViaRANSAC(dataSet, 0.65, 0.95, 0.1);
+        planes.push_back(result);
+
+        // remove the data that already fit some plane. use the rest point to find another plane
+        for (int j = 0; j < result.size(); ++j) {
+            dataSet.erase(dataSet.begin() + result[j]);
+        }
+    }
+
+//    // update the color of PlyPoints
+//    for (int k = 0; k < planes.size(); ++k) {
+//        for (int i = 0; i < planes[i].size(); ++i) {
+//
+//        }
+//    }
+
+
+
+    for (int k = 0; k < planes[0].size(); ++k) {
+        ply[planes[0][k]].colour = colours[0];
+    }
 
 
     // Write the resulting (re-coloured) point cloud to a PLY file.

@@ -5,10 +5,15 @@ CMakeFiles/planeFinder.dir/rply.c.o: ../rply.c
 CMakeFiles/planeFinder.dir/rply.c.o: ../rply.h
 CMakeFiles/planeFinder.dir/rply.c.o: ../rplyfile.h
 
+CMakeFiles/planeFinder.dir/Plane.cpp.o: ../Plane.cpp
+CMakeFiles/planeFinder.dir/Plane.cpp.o: ../Plane.h
+CMakeFiles/planeFinder.dir/Plane.cpp.o: ../SimplePly.h
+
 CMakeFiles/planeFinder.dir/SimplePly.cpp.o: ../SimplePly.cpp
 CMakeFiles/planeFinder.dir/SimplePly.cpp.o: ../SimplePly.h
 CMakeFiles/planeFinder.dir/SimplePly.cpp.o: ../rply.h
 
+CMakeFiles/planeFinder.dir/planeFinder.cpp.o: ../Plane.h
 CMakeFiles/planeFinder.dir/planeFinder.cpp.o: ../SimplePly.h
 CMakeFiles/planeFinder.dir/planeFinder.cpp.o: ../planeFinder.cpp
 

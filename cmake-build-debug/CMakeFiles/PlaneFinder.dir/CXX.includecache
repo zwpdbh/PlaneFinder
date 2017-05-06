@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.cpp
+Plane.h
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
+
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
+SimplePly.h
+/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
+
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp
 SimplePly.h
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
@@ -25,10 +33,10 @@ string
 -
 
 /Users/zw/code/C++_Projects/PlaneFinder/planeFinder.cpp
-SimplePly.h
-/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
 iostream
 -
+Plane.h
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
 
 /Users/zw/code/C++_Projects/PlaneFinder/rply.h
 
