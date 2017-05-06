@@ -8,11 +8,16 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_CXX_FLAGS "-I/usr/local/Cellar/eigen/3.3.3/include/eigen3")
 
-#include_directories(/usr/local/opt/eigen/include)
+
+# my plane finder program
 add_executable(planeFinder
         planeFinder.cpp
         SimplePly.h
         SimplePly.cpp
         rply.h
         rply.c
-        )
+        Plane.cpp Plane.h)
+
+
+# playground
+add_executable(playground playground.cpp)

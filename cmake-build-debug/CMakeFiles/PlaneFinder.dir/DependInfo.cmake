@@ -13,6 +13,7 @@ set(CMAKE_C_COMPILER_ID "AppleClang")
 set(CMAKE_C_TARGET_INCLUDE_PATH
   )
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/Users/zw/code/C++_Projects/PlaneFinder/Plane.cpp" "/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles/planeFinder.dir/Plane.cpp.o"
   "/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp" "/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles/planeFinder.dir/SimplePly.cpp.o"
   "/Users/zw/code/C++_Projects/PlaneFinder/planeFinder.cpp" "/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles/planeFinder.dir/planeFinder.cpp.o"
   )

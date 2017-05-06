@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named playground
+
+# Build rule for target.
+playground: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 playground
+.PHONY : playground
+
+# fast build rule for target.
+playground/fast:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/build
+.PHONY : playground/fast
+
+#=============================================================================
 # Target rules for targets named planeFinder
 
 # Build rule for target.
@@ -122,6 +135,33 @@ planeFinder: cmake_check_build_system
 planeFinder/fast:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/build
 .PHONY : planeFinder/fast
+
+Plane.o: Plane.cpp.o
+
+.PHONY : Plane.o
+
+# target to build an object file
+Plane.cpp.o:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Plane.cpp.o
+.PHONY : Plane.cpp.o
+
+Plane.i: Plane.cpp.i
+
+.PHONY : Plane.i
+
+# target to preprocess a source file
+Plane.cpp.i:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Plane.cpp.i
+.PHONY : Plane.cpp.i
+
+Plane.s: Plane.cpp.s
+
+.PHONY : Plane.s
+
+# target to generate assembly for a file
+Plane.cpp.s:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Plane.cpp.s
+.PHONY : Plane.cpp.s
 
 SimplePly.o: SimplePly.cpp.o
 
@@ -177,6 +217,33 @@ planeFinder.cpp.s:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/planeFinder.cpp.s
 .PHONY : planeFinder.cpp.s
 
+playground.o: playground.cpp.o
+
+.PHONY : playground.o
+
+# target to build an object file
+playground.cpp.o:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/playground.cpp.o
+.PHONY : playground.cpp.o
+
+playground.i: playground.cpp.i
+
+.PHONY : playground.i
+
+# target to preprocess a source file
+playground.cpp.i:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/playground.cpp.i
+.PHONY : playground.cpp.i
+
+playground.s: playground.cpp.s
+
+.PHONY : playground.s
+
+# target to generate assembly for a file
+playground.cpp.s:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/playground.cpp.s
+.PHONY : playground.cpp.s
+
 rply.o: rply.c.o
 
 .PHONY : rply.o
@@ -212,13 +279,20 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... playground"
 	@echo "... planeFinder"
+	@echo "... Plane.o"
+	@echo "... Plane.i"
+	@echo "... Plane.s"
 	@echo "... SimplePly.o"
 	@echo "... SimplePly.i"
 	@echo "... SimplePly.s"
 	@echo "... planeFinder.o"
 	@echo "... planeFinder.i"
 	@echo "... planeFinder.s"
+	@echo "... playground.o"
+	@echo "... playground.i"
+	@echo "... playground.s"
 	@echo "... rply.o"
 	@echo "... rply.i"
 	@echo "... rply.s"
