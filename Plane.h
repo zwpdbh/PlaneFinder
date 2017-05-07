@@ -11,16 +11,21 @@
 class Plane {
 
 public:
-    Plane(PlyPoint p1, PlyPoint p2, PlyPoint p3);
-    bool isInlier(PlyPoint p, double threshold);
-    std::vector<int> getInliersIndex(std::vector<PlyPoint> data, double threshold);
-
+    Plane() {};
+    Plane(unsigned long p1, unsigned long p2, unsigned long p3, SimplePly ply);
+    bool isInlier(SimplePly ply, unsigned long p, double threshold);
+    std::vector<unsigned long> inliers;
+    Eigen::Vector3i color;
 private:
+    unsigned long p1;
+    unsigned long p2;
+    unsigned long p3;
     Eigen::Vector3d u;
     Eigen::Vector3d v;
     Eigen::Vector3d norm;
     Eigen::Vector3d normalized;
     Eigen::Vector3d v0;
+
     double distanceToThisPlane(PlyPoint p0);
 };
 

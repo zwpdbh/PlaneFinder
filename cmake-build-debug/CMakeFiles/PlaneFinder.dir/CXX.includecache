@@ -35,12 +35,12 @@ string
 -
 
 /Users/zw/code/C++_Projects/PlaneFinder/planeFinder.cpp
-SimplePly.h
-/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
 iostream
 -
 Eigen/Dense
 -
+Plane.h
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
 
 /Users/zw/code/C++_Projects/PlaneFinder/rply.h
 
