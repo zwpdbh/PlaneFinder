@@ -12,17 +12,17 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    vector<int> mydata;
-    for (int i = 0; i < 10; ++i) {
-        mydata.push_back( i * i);
+
+
+    for (int i = 0; i < 5; ++i) {
+        int rColor = rand() % 230 + 10;
+        int gColor = rand() % 230 + 10;
+        cout << rColor << endl;
+        cout << gColor << endl;
+
+        cout << endl;
     }
 
-    vector<int> positions;
-    for (int j = 0; j < 3; ++j) {
-        positions.push_back( j + 1);
-    }
-
-    mydata.erase(mydata.begin() + positions[0]);
 
 
     return 0;
