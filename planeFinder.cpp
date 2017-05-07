@@ -78,10 +78,9 @@ int main(int argc, char *argv[]) {
 
                 // pick each point from remained data set
                 unsigned long index = dataSetIndexes[j];
-                Eigen::Vector3d v0 = ply[index].location;
-
                 if (plane.isInlier(ply,index, threshold)) {
                     plane.inliers.push_back(index);
+                    cout << plane.inliers.size() << endl;
                 }
             }
 

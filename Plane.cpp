@@ -4,6 +4,7 @@
 
 #include "Plane.h"
 #include <Eigen/Dense>
+#include <iostream>
 using namespace std;
 
 
@@ -39,11 +40,8 @@ Plane::Plane(unsigned long p1, unsigned long p2, unsigned long p3, SimplePly ply
     this->color = generateRandomColor();
 }
 
-double Plane::distanceToThisPlane(PlyPoint p0) {
-    return fabs(this->normalized.dot(p0.location - this->v0));
-}
-
 bool Plane::isInlier(SimplePly ply, unsigned long p, double threshold) {
-    return distanceToThisPlane(ply[p]) < threshold;
+    double d = fabs(this->normalized.dot(ply[p].location - this->v0));
+    return d < threshold;
 }
 
