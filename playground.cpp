@@ -6,24 +6,24 @@
 #include <math.h>
 #include <Eigen/Core>
 #include <Eigen/Dense>
+#include <vector>
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    cout << pow(2, 5) << endl;
+    vector<int> mydata;
+    for (int i = 0; i < 10; ++i) {
+        mydata.push_back( i * i);
+    }
 
-    Eigen::Vector3d u(1, 1, 1);
-    Eigen::Vector3d v(2, 3, 4);
-    Eigen::Vector3d w(v-u);
+    vector<int> positions;
+    for (int j = 0; j < 3; ++j) {
+        positions.push_back( j + 1);
+    }
 
-    cout << w << endl;
-    cout << w[0] << endl;
-    cout << w[1] << endl;
-    cout << w[2] << endl;
+    mydata.erase(mydata.begin() + positions[0]);
 
-//    cout << u.cross3(v) << endl;
-    cout << u.cross(v) << endl;
 
     return 0;
 }

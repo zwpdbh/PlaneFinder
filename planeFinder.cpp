@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 //  int nTrials = atoi(argv[5]);
 
     int nPlanes = 3;
-    double threshold = 0.1;
+    double threshold = 0.05;
     double outlierRatio = 0.70;
     double successfulRate = 0.9;
     int minNumOfSampleNeeded = 3;
@@ -45,9 +45,9 @@ int main(int argc, char *argv[]) {
 
 
     //
-    vector<int> currentDataSetIndexes;
+    vector<int> remaindingDataSet;
     for (int k = 0; k < ply.size(); ++k) {
-        currentDataSetIndexes.push_back(k);
+        remaindingDataSet.push_back(k);
     }
 
     std::vector<Eigen::Vector3i> colours;
@@ -55,19 +55,22 @@ int main(int argc, char *argv[]) {
     colours.push_back(Eigen::Vector3i(0, 255, 0));
     colours.push_back(Eigen::Vector3i(0, 0, 255));
 
-    for (int i = 0; i < 1; ++i) {
+    for (int i = 0; i < nPlanes; ++i) {
         vector<long> bestInliers;
         vector<size_t > bestPlane;
+        cout << endl;
+        cout << "try to fit the " << i + 1 << "th plane..." << endl;
+        cout << "take " << nTrials  << " trails" << endl;
+
 
         // repeat trials to find the best plane
-        cout << "take " << nTrials  << " trails" << endl;
         for (int r = 0; r < nTrials; ++r) {
             // 1. randomly take 3 points as my plane model
             vector<size_t> randomPlane;
             vector<long> inliers;
 
             while(randomPlane.size() <3 ) {
-                size_t sampleIndex = rand() % currentDataSetIndexes.size();
+                size_t sampleIndex = rand() % remaindingDataSet.size();
                 // true if not present, false other wise
                 if (find(randomPlane.begin(), randomPlane.end(), sampleIndex) == randomPlane.end()) {
                     randomPlane.push_back(sampleIndex);
@@ -75,7 +78,7 @@ int main(int argc, char *argv[]) {
             }
 
             // 2. pick each point from data set to test if it is an inlier.
-            for (int j = 0; j < currentDataSetIndexes.size(); ++j) {
+            for (int j = 0; j < remaindingDataSet.size(); ++j) {
                 double d;
                 Eigen::Vector3d p0 = ply[randomPlane[0]].location;
                 Eigen::Vector3d p1 = ply[randomPlane[1]].location;
@@ -87,7 +90,7 @@ int main(int argc, char *argv[]) {
                 Eigen::Vector3d normalized = norm / sqrt(norm.dot(norm));
 
                 // pick each point from remained data set
-                long index = currentDataSetIndexes[j];
+                long index = remaindingDataSet[j];
                 Eigen::Vector3d v0 = ply[index].location;
                 d = fabs(normalized.dot(v0 - p1));
 
@@ -98,12 +101,13 @@ int main(int argc, char *argv[]) {
             }
 
             // 3. evaluate the trial result
-            cout << r <<"th trial evaluation result: " << (double) inliers.size() / currentDataSetIndexes.size() << endl;
-            if ((double) inliers.size() / currentDataSetIndexes.size() > (double) bestInliers.size() / currentDataSetIndexes.size()) {
+            cout << "" << endl;
+            cout << r <<"th trial evaluation result: " << (double) inliers.size() / remaindingDataSet.size() << endl;
+            if ((double) inliers.size() / remaindingDataSet.size() > (double) bestInliers.size() / remaindingDataSet.size()) {
                 bestPlane = randomPlane;
                 bestInliers = inliers;
             }
-            cout << "current best plane evaluation: " << (double) bestInliers.size() / currentDataSetIndexes.size() << endl;
+            cout << "current best plane evaluation: " << (double) bestInliers.size() / remaindingDataSet.size() << endl;
 
             // clear the randomPlane
             randomPlane.clear();
@@ -112,13 +116,16 @@ int main(int argc, char *argv[]) {
         } // end of repeat tails
 
 
-        // update plane color
+        // update plane color, also update the data set index
+        cout << "Before update data set, the current data set size is: " << remaindingDataSet.size() << endl;
         for (int k = 0; k < bestInliers.size(); ++k) {
             long index = bestInliers[k];
             ply[index].colour = colours[i];
+            remaindingDataSet.erase(std::remove(remaindingDataSet.begin(), remaindingDataSet.end(), index), remaindingDataSet.end());
+            cout << "Current data size: " << remaindingDataSet.size() << endl;
         }
 
-        // update data set, find next plane in the rest data set
+        cout << "After update data set, the current data set size is: " << remaindingDataSet.size() << endl;
 
     }
 
