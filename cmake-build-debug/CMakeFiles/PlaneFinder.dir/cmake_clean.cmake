@@ -2,7 +2,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/planeFinder.dir/planeFinder.cpp.o"
   "CMakeFiles/planeFinder.dir/SimplePly.cpp.o"
   "CMakeFiles/planeFinder.dir/rply.c.o"
-  "CMakeFiles/planeFinder.dir/MeanShift.cpp.o"
   "CMakeFiles/planeFinder.dir/Plane.cpp.o"
   "planeFinder.pdb"
   "planeFinder"

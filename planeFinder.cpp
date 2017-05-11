@@ -25,6 +25,10 @@ vector<PlyPoint *> getRandomPoints(unordered_map<long, PlyPoint *> *dataSet) {
 }
 
 
+int updateNumOfTrials(double successfulRate, double outlierRatio, int minNumOfSampleNeeded) {
+    return (int) (log(1 - successfulRate) / log(1 - pow((1 - outlierRatio), minNumOfSampleNeeded)));
+}
+
 int main(int argc, char *argv[]) {
 
     // Check the commandline arguments.
@@ -38,10 +42,10 @@ int main(int argc, char *argv[]) {
 
     int nPlanes = 5;
     double threshold = 0.05;
-    double outlierRatio = 0.65;
-    double successfulRate = 0.95;
+    double expectedOutlierRatio = 0.95;
+    double expectedSuccessfulRate = 0.95;
     int minNumOfSampleNeeded = 3;
-    int nTrials = (int) (log(1 - successfulRate) / log(1 - pow((1 - outlierRatio), minNumOfSampleNeeded)));
+    int nTrials = (int) (log(1 - expectedSuccessfulRate) / log(1 - pow((1 - expectedOutlierRatio), minNumOfSampleNeeded)));
 
     string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
     string outputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/output_adzePoints.ply";
@@ -89,13 +93,13 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < nPlanes; ++i) {
         vector<long> bestInliers;
         Plane bestPlane;
+        nTrials = updateNumOfTrials(expectedSuccessfulRate, expectedOutlierRatio, minNumOfSampleNeeded);
         cout << endl;
         cout << "try to fit the " << i + 1 << "th plane..." << endl;
         cout << "take " << nTrials << " trails" << endl;
-
+        nTrials = updateNumOfTrials(0.95, 0.9, 3);
         // repeat trials to find the best plane
         for (int r = 0; r < nTrials; ++r) {
-
             // 1. randomly take 3 points as my plane model
             vector<PlyPoint *> randomPoints = getRandomPoints(&dataSet);
 
@@ -105,14 +109,17 @@ int main(int argc, char *argv[]) {
             if (currentInliers.size() > bestInliers.size()) {
                 bestInliers = currentInliers;
                 bestPlane = currentPlane;
+
+                double inlierRatio = (double) bestInliers.size() / dataSet.size();
+                double updatedOutlierRatio = 1 - inlierRatio;
+                cout << "" << endl;
+                cout << "update best plane evaluation: " << inlierRatio << endl;
+                nTrials = updateNumOfTrials(expectedSuccessfulRate, updatedOutlierRatio, minNumOfSampleNeeded);
+//                r = r / 4;
+                cout << "update outlier ratio: " << updatedOutlierRatio << endl;
+                cout << "Update nTrials to: " << nTrials << endl;
             }
 
-            // 3. evaluate the trial result
-            cout << "" << endl;
-            cout << r << "th trial evaluation result: " << (double) currentInliers.size() / dataSet.size()
-                 << endl;
-            cout << "current best plane evaluation: " << (double) bestInliers.size() / dataSet.size()
-                 << endl;
 
         }
 

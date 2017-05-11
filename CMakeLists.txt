@@ -16,7 +16,7 @@ add_executable(planeFinder
         SimplePly.cpp
         rply.h
         rply.c
-        MeanShift.cpp MeanShift.h Plane.cpp Plane.h)
+        Plane.cpp Plane.h)
 
 
 # playground

@@ -136,33 +136,6 @@ planeFinder/fast:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/build
 .PHONY : planeFinder/fast
 
-MeanShift.o: MeanShift.cpp.o
-
-.PHONY : MeanShift.o
-
-# target to build an object file
-MeanShift.cpp.o:
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/MeanShift.cpp.o
-.PHONY : MeanShift.cpp.o
-
-MeanShift.i: MeanShift.cpp.i
-
-.PHONY : MeanShift.i
-
-# target to preprocess a source file
-MeanShift.cpp.i:
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/MeanShift.cpp.i
-.PHONY : MeanShift.cpp.i
-
-MeanShift.s: MeanShift.cpp.s
-
-.PHONY : MeanShift.s
-
-# target to generate assembly for a file
-MeanShift.cpp.s:
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/MeanShift.cpp.s
-.PHONY : MeanShift.cpp.s
-
 Plane.o: Plane.cpp.o
 
 .PHONY : Plane.o
@@ -314,9 +287,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... playground"
 	@echo "... planeFinder"
-	@echo "... MeanShift.o"
-	@echo "... MeanShift.i"
-	@echo "... MeanShift.s"
 	@echo "... Plane.o"
 	@echo "... Plane.i"
 	@echo "... Plane.s"
