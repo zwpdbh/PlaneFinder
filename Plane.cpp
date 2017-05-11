@@ -1,47 +1,34 @@
 //
-// Created by zwpdbh on 06/05/2017.
+// Created by zwpdbh on 11/05/2017.
 //
+
 
 #include "Plane.h"
 #include <Eigen/Dense>
-#include <iostream>
-using namespace std;
 
-
-Eigen::Vector3i generateRandomColor() {
-    int defaultColor = 107;
-
-    Eigen::Vector3i colourDefault(defaultColor, defaultColor, defaultColor);
-
-    int rColor;
-    int gColor;
-    int bColor;
-
-    // 107 will be the default colour for point
-    do {
-        rColor = rand() % 230 + 10;
-        gColor = rand() % 230 + 10;
-        bColor = rand() % 230 + 10;
-    } while (rColor == defaultColor && gColor == defaultColor && bColor== defaultColor);
-
-    return Eigen::Vector3i(rColor, gColor, bColor);
-}
-
-Plane::Plane(unsigned long p1, unsigned long p2, unsigned long p3, SimplePly ply) {
+Plane::Plane(PlyPoint *p1, PlyPoint *p2, PlyPoint *p3) {
     this->p1 = p1;
     this->p2 = p2;
     this->p3 = p3;
-    this->v0 =ply[this->p1].location;
-    this->u = ply[this->p1].location - ply[this->p3].location;
-    this->v = ply[this->p3].location - ply[this->p2].location;
-    this->norm = this->u.cross(this->v);
-    this->normalized = this->norm / sqrt(this->norm.dot(this->norm));
-    //The point on plane meet the equation norm.dot(P-v2) = 0, P(x, y z)
-    this->color = generateRandomColor();
 }
 
-bool Plane::isInlier(SimplePly ply, unsigned long p, double threshold) {
-    double d = fabs(this->normalized.dot(ply[p].location - this->v0));
-    return d < threshold;
-}
+std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet, double threshold) {
 
+    Eigen::Vector3d p0 = this->p1->location;
+    Eigen::Vector3d p1 = this->p2->location;
+    Eigen::Vector3d p2 = this->p3->location;
+
+    Eigen::Vector3d u = p0 - p1;
+    Eigen::Vector3d v = p2 - p1;
+    Eigen::Vector3d norm = u.cross(v);
+    Eigen::Vector3d normalized = norm / sqrt(norm.dot(norm));
+
+    for (auto const &each: dataSet) {
+        double d = fabs(normalized.dot(each.second->location - p1));
+        if (d < threshold) {
+            this->inliers.push_back(each.first);
+        }
+    }
+
+    return this->inliers;
+}

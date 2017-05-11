@@ -5,6 +5,10 @@ CMakeFiles/planeFinder.dir/rply.c.o: ../rply.c
 CMakeFiles/planeFinder.dir/rply.c.o: ../rply.h
 CMakeFiles/planeFinder.dir/rply.c.o: ../rplyfile.h
 
+CMakeFiles/planeFinder.dir/MeanShift.cpp.o: ../MeanShift.cpp
+CMakeFiles/planeFinder.dir/MeanShift.cpp.o: ../MeanShift.h
+CMakeFiles/planeFinder.dir/MeanShift.cpp.o: ../SimplePly.h
+
 CMakeFiles/planeFinder.dir/Plane.cpp.o: ../Plane.cpp
 CMakeFiles/planeFinder.dir/Plane.cpp.o: ../Plane.h
 CMakeFiles/planeFinder.dir/Plane.cpp.o: ../SimplePly.h

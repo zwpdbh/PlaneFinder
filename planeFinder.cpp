@@ -1,9 +1,29 @@
-//#include "SimplePly.h"
+
 #include <iostream>
-#include <Eigen/Dense>
 #include "Plane.h"
 
 using namespace std;
+
+vector<PlyPoint *> getRandomPoints(unordered_map<long, PlyPoint *> *dataSet) {
+    vector<PlyPoint *> randomPoints;
+
+    vector<unsigned long> randomIndexes;
+    while (randomIndexes.size() < 3) {
+        unsigned long  sampleIndex = rand() % dataSet->size();
+        if (find(randomIndexes.begin(), randomIndexes.end(), sampleIndex) == randomIndexes.end()) {
+            randomIndexes.push_back(sampleIndex);
+        }
+    }
+
+    for (unsigned long const index: randomIndexes) {
+        auto it = dataSet->begin();
+        advance(it, index);
+        randomPoints.push_back(it->second);
+    }
+
+    return randomPoints;
+}
+
 
 int main(int argc, char *argv[]) {
 
@@ -16,10 +36,10 @@ int main(int argc, char *argv[]) {
 //  double threshold = atof(argv[4]);
 //  int nTrials = atoi(argv[5]);
 
-    int nPlanes = 4;
+    int nPlanes = 5;
     double threshold = 0.05;
-    double outlierRatio = 0.70;
-    double successfulRate = 0.9;
+    double outlierRatio = 0.65;
+    double successfulRate = 0.95;
     int minNumOfSampleNeeded = 3;
     int nTrials = (int) (log(1 - successfulRate) / log(1 - pow((1 - outlierRatio), minNumOfSampleNeeded)));
 
@@ -43,16 +63,27 @@ int main(int argc, char *argv[]) {
     std::cout << "Read " << ply.size() << " points" << std::endl;
 
     // put all Ply points' associated index as data set.
-    int defaultColor = 107;
-    Eigen::Vector3i colourDefault(defaultColor, defaultColor, defaultColor);
-    vector<unsigned long> dataSetIndexes;
-    for (unsigned long k = 0; k < ply.size(); ++k) {
-        ply[k].colour = colourDefault;
-        dataSetIndexes.push_back(k);
+    unordered_map<long, PlyPoint *> dataSet;
+    for (long i = 0; i < ply.size(); i++) {
+        dataSet[i] = &ply[i];
     }
 
-    // begin RANSAC
-    for (unsigned long i = 0; i < nPlanes; ++i) {
+    vector<Eigen::Vector3i> colours;
+    for (int i = 0; i < 8; i++) {
+        colours.push_back(Eigen::Vector3i(204, 51, 255));
+        colours.push_back(Eigen::Vector3i(255, 102, 102));
+        colours.push_back(Eigen::Vector3i(230, 0, 172));
+        colours.push_back(Eigen::Vector3i(255, 255, 0));
+        colours.push_back(Eigen::Vector3i(0, 204, 0));
+        colours.push_back(Eigen::Vector3i(198, 140, 83));
+        colours.push_back(Eigen::Vector3i(153, 204, 255));
+    }
+
+    vector<Plane> planes;
+
+
+    for (int i = 0; i < nPlanes; ++i) {
+        vector<long> bestInliers;
         Plane bestPlane;
         cout << endl;
         cout << "try to fit the " << i + 1 << "th plane..." << endl;
@@ -60,65 +91,47 @@ int main(int argc, char *argv[]) {
 
         // repeat trials to find the best plane
         for (int r = 0; r < nTrials; ++r) {
+
             // 1. randomly take 3 points as my plane model
-            vector<unsigned long> randPoint;
+            vector<PlyPoint *> randomPoints = getRandomPoints(&dataSet);
 
-            // randomly pick 3 point
-            while (randPoint.size() < 3) {
-                unsigned long sampleIndex = rand() % dataSetIndexes.size();
-                // true if not present, false other wise
-                if (find(randPoint.begin(), randPoint.end(), sampleIndex) == randPoint.end()) {
-                    randPoint.push_back(sampleIndex);
-                }
-            }
+            Plane currentPlane(randomPoints[0], randomPoints[1], randomPoints[2]);
+            vector<long> currentInliers = currentPlane.fitPlane(dataSet, 0.05);
 
-            Plane plane(randPoint[0], randPoint[1], randPoint[2], ply);
-            // 2. pick each point from data set to test if it is an inlier.
-            for (int j = 0; j < dataSetIndexes.size(); ++j) {
-
-                // pick each point from remained data set
-                unsigned long index = dataSetIndexes[j];
-                if (plane.isInlier(ply,index, threshold)) {
-                    plane.inliers.push_back(index);
-                    cout << plane.inliers.size() << endl;
-                }
+            if (currentInliers.size() > bestInliers.size()) {
+                bestInliers = currentInliers;
+                bestPlane = currentPlane;
             }
 
             // 3. evaluate the trial result
             cout << "" << endl;
-            cout << r << "th trial evaluation result: " << (double) plane.inliers.size() / dataSetIndexes.size()
+            cout << r << "th trial evaluation result: " << (double) currentInliers.size() / dataSet.size()
                  << endl;
-            if ((double) plane.inliers.size() / dataSetIndexes.size() >
-                (double) bestPlane.inliers.size() / dataSetIndexes.size()) {
-                bestPlane = plane;
-            }
-            cout << "current best plane evaluation: " << (double) bestPlane.inliers.size() / dataSetIndexes.size()
+            cout << "current best plane evaluation: " << (double) bestInliers.size() / dataSet.size()
                  << endl;
 
-            // clear the randPoint
-            randPoint.clear();
+        }
 
-        } // end of repeat tails
 
+        planes.push_back(bestPlane);
 
         // update plane color, also update the data set index
-        cout << "Before update data set, the current data set size is: " << dataSetIndexes.size() << endl;
+        cout << "the current bestInliers' size is: " << bestInliers.size() << endl;
+        cout << "Before update data set, the current data set size is: " << dataSet.size() << endl;
 
-        for (int k = 0; k < bestPlane.inliers.size(); ++k) {
-            long index = bestPlane.inliers[k];
-            ply[index].colour = bestPlane.color;
-
+        Eigen::Vector3i colour = colours[i];
+        for (auto const each: bestInliers) {
+            dataSet[each]->colour = colour;
+            dataSet.erase(each);
         }
 
-        dataSetIndexes.clear();
-        for (i = 0; i < ply.size(); ++i) {
-            Eigen::Vector3i pointColor = ply[i].colour;
-            if (pointColor[0] == defaultColor && pointColor[1] == defaultColor && pointColor[2] == defaultColor) {
-                dataSetIndexes.push_back(i);
-            }
-        }
-        cout << "After update data set, the current data set size is: " << dataSetIndexes.size() << endl;
+        cout << "After update data set, the current data set size is: " << dataSet.size() << endl;
+    }
 
+
+    cout << "Fit total " << planes.size() << " planes, their size are: " << endl;
+    for (int i = 0; i < planes.size(); ++i) {
+        cout << "plane " << i+1 << " size: " << planes[i].inliers.size() << endl;
     }
 
     // Write the resulting (re-coloured) point cloud to a PLY file.

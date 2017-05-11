@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug
 CMakeFiles/playground.dir/all:
 	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/depend
 	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target playground"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=7,8,9,10 "Built target playground"
 .PHONY : CMakeFiles/playground.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/playground.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/playground.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/playground.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/playground.dir/rule
@@ -103,7 +103,7 @@ clean: CMakeFiles/playground.dir/clean
 CMakeFiles/planeFinder.dir/all:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/depend
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target planeFinder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target planeFinder"
 .PHONY : CMakeFiles/planeFinder.dir/all
 
 # Include target in all.
@@ -113,7 +113,7 @@ all: CMakeFiles/planeFinder.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/planeFinder.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/planeFinder.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/planeFinder.dir/rule

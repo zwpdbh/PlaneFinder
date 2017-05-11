@@ -126,6 +126,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/MeanShift.cpp">
+			<Option target="planeFinder"/>
+		</Unit>
+		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/MeanShift.h">
+			<Option target="planeFinder"/>
+		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/Plane.cpp">
 			<Option target="planeFinder"/>
 		</Unit>
@@ -133,9 +139,11 @@
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp">
+			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h">
+			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/planeFinder.cpp">
@@ -145,9 +153,11 @@
 			<Option target="playground"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/rply.c">
+			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/rply.h">
+			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/CMakeLists.txt">
