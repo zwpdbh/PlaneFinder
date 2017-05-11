@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/zw/code/C++_Projects/PlaneFinder/rply.c
+stdio.h
+-
+ctype.h
+-
+assert.h
+-
+string.h
+-
+limits.h
+-
+float.h
+-
+stdarg.h
+-
+stdlib.h
+-
+stddef.h
+-
+rply.h
+/Users/zw/code/C++_Projects/PlaneFinder/rply.h
+rplyfile.h
+/Users/zw/code/C++_Projects/PlaneFinder/rplyfile.h
+stdint.h
+-
+
+/Users/zw/code/C++_Projects/PlaneFinder/rply.h
+
+/Users/zw/code/C++_Projects/PlaneFinder/rplyfile.h
+
