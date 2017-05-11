@@ -1,36 +1,34 @@
 //
-// Created by zwpdbh on 06/05/2017.
+// Created by zwpdbh on 11/05/2017.
 //
+
 
 #include "Plane.h"
 #include <Eigen/Dense>
-using namespace std;
 
-Plane::Plane(PlyPoint p1, PlyPoint p2, PlyPoint p3) {
-    this->v0 = p2.location;
-    this->u = p1.location - p2.location;
-    this->v = p3.location - p2.location;
-    this->norm = this->u.cross(this->v);
-    this->normalized = this->norm / sqrt(this->norm.dot(this->norm));
-    //The point on plane meet the equation norm.dot(P-v2) = 0, P(x, y z)
+Plane::Plane(PlyPoint *p1, PlyPoint *p2, PlyPoint *p3) {
+    this->p1 = p1;
+    this->p2 = p2;
+    this->p3 = p3;
 }
 
-double Plane::distanceToThisPlane(PlyPoint p0) {
-    return fabs(this->normalized.dot(p0.location - this->v0));
-}
+std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet, double threshold) {
 
-bool Plane::isInlier(PlyPoint p, double threshold) {
-    return distanceToThisPlane(p) < threshold;
-}
+    Eigen::Vector3d p0 = this->p1->location;
+    Eigen::Vector3d p1 = this->p2->location;
+    Eigen::Vector3d p2 = this->p3->location;
 
-std::vector<int> Plane::getInliersIndex(std::vector<PlyPoint> data, double threshold){
-    vector<int> inliers;
+    Eigen::Vector3d u = p0 - p1;
+    Eigen::Vector3d v = p2 - p1;
+    Eigen::Vector3d norm = u.cross(v);
+    Eigen::Vector3d normalized = norm / sqrt(norm.dot(norm));
 
-    for (int i = 0; i < data.size(); ++i) {
-        if (this->isInlier(data[0], threshold)) {
-            inliers.push_back(i);
+    for (auto const &each: dataSet) {
+        double d = fabs(normalized.dot(each.second->location - p1));
+        if (d < threshold) {
+            this->inliers.push_back(each.first);
         }
     }
-    return inliers;
-}
 
+    return this->inliers;
+}

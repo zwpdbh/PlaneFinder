@@ -136,6 +136,33 @@ planeFinder/fast:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/build
 .PHONY : planeFinder/fast
 
+MeanShift.o: MeanShift.cpp.o
+
+.PHONY : MeanShift.o
+
+# target to build an object file
+MeanShift.cpp.o:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/MeanShift.cpp.o
+.PHONY : MeanShift.cpp.o
+
+MeanShift.i: MeanShift.cpp.i
+
+.PHONY : MeanShift.i
+
+# target to preprocess a source file
+MeanShift.cpp.i:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/MeanShift.cpp.i
+.PHONY : MeanShift.cpp.i
+
+MeanShift.s: MeanShift.cpp.s
+
+.PHONY : MeanShift.s
+
+# target to generate assembly for a file
+MeanShift.cpp.s:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/MeanShift.cpp.s
+.PHONY : MeanShift.cpp.s
+
 Plane.o: Plane.cpp.o
 
 .PHONY : Plane.o
@@ -169,6 +196,7 @@ SimplePly.o: SimplePly.cpp.o
 
 # target to build an object file
 SimplePly.cpp.o:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/SimplePly.cpp.o
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/SimplePly.cpp.o
 .PHONY : SimplePly.cpp.o
 
@@ -178,6 +206,7 @@ SimplePly.i: SimplePly.cpp.i
 
 # target to preprocess a source file
 SimplePly.cpp.i:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/SimplePly.cpp.i
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/SimplePly.cpp.i
 .PHONY : SimplePly.cpp.i
 
@@ -187,6 +216,7 @@ SimplePly.s: SimplePly.cpp.s
 
 # target to generate assembly for a file
 SimplePly.cpp.s:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/SimplePly.cpp.s
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/SimplePly.cpp.s
 .PHONY : SimplePly.cpp.s
 
@@ -250,6 +280,7 @@ rply.o: rply.c.o
 
 # target to build an object file
 rply.c.o:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/rply.c.o
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/rply.c.o
 .PHONY : rply.c.o
 
@@ -259,6 +290,7 @@ rply.i: rply.c.i
 
 # target to preprocess a source file
 rply.c.i:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/rply.c.i
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/rply.c.i
 .PHONY : rply.c.i
 
@@ -268,6 +300,7 @@ rply.s: rply.c.s
 
 # target to generate assembly for a file
 rply.c.s:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/rply.c.s
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/rply.c.s
 .PHONY : rply.c.s
 
@@ -281,6 +314,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... playground"
 	@echo "... planeFinder"
+	@echo "... MeanShift.o"
+	@echo "... MeanShift.i"
+	@echo "... MeanShift.s"
 	@echo "... Plane.o"
 	@echo "... Plane.i"
 	@echo "... Plane.s"

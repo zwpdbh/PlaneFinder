@@ -5,6 +5,10 @@ CMakeFiles/planeFinder.dir/rply.c.o
  /Users/zw/code/C++_Projects/PlaneFinder/rply.c
  /Users/zw/code/C++_Projects/PlaneFinder/rply.h
  /Users/zw/code/C++_Projects/PlaneFinder/rplyfile.h
+CMakeFiles/planeFinder.dir/MeanShift.cpp.o
+ /Users/zw/code/C++_Projects/PlaneFinder/MeanShift.cpp
+ /Users/zw/code/C++_Projects/PlaneFinder/MeanShift.h
+ /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
 CMakeFiles/planeFinder.dir/Plane.cpp.o
  /Users/zw/code/C++_Projects/PlaneFinder/Plane.cpp
  /Users/zw/code/C++_Projects/PlaneFinder/Plane.h
@@ -14,5 +18,6 @@ CMakeFiles/planeFinder.dir/SimplePly.cpp.o
  /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
  /Users/zw/code/C++_Projects/PlaneFinder/rply.h
 CMakeFiles/planeFinder.dir/planeFinder.cpp.o
+ /Users/zw/code/C++_Projects/PlaneFinder/Plane.h
  /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
  /Users/zw/code/C++_Projects/PlaneFinder/planeFinder.cpp
