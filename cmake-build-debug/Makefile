@@ -136,6 +136,36 @@ planeFinder/fast:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/build
 .PHONY : planeFinder/fast
 
+PCA.o: PCA.cpp.o
+
+.PHONY : PCA.o
+
+# target to build an object file
+PCA.cpp.o:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/PCA.cpp.o
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/PCA.cpp.o
+.PHONY : PCA.cpp.o
+
+PCA.i: PCA.cpp.i
+
+.PHONY : PCA.i
+
+# target to preprocess a source file
+PCA.cpp.i:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/PCA.cpp.i
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/PCA.cpp.i
+.PHONY : PCA.cpp.i
+
+PCA.s: PCA.cpp.s
+
+.PHONY : PCA.s
+
+# target to generate assembly for a file
+PCA.cpp.s:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/PCA.cpp.s
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/PCA.cpp.s
+.PHONY : PCA.cpp.s
+
 Plane.o: Plane.cpp.o
 
 .PHONY : Plane.o
@@ -287,6 +317,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... playground"
 	@echo "... planeFinder"
+	@echo "... PCA.o"
+	@echo "... PCA.i"
+	@echo "... PCA.s"
 	@echo "... Plane.o"
 	@echo "... Plane.i"
 	@echo "... Plane.s"

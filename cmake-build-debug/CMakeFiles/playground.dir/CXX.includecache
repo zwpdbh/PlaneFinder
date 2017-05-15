@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/Users/zw/code/C++_Projects/PlaneFinder/PCA.cpp
+PCA.h
+/Users/zw/code/C++_Projects/PlaneFinder/PCA.h
+iostream
+-
+
+/Users/zw/code/C++_Projects/PlaneFinder/PCA.h
+SimplePly.h
+/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
+
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp
 SimplePly.h
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
@@ -25,13 +35,13 @@ string
 -
 
 /Users/zw/code/C++_Projects/PlaneFinder/playground.cpp
-SimplePly.h
-/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
+PCA.h
+/Users/zw/code/C++_Projects/PlaneFinder/PCA.h
 iostream
 -
 Eigen/Dense
 -
-unordered_map
+map
 -
 
 /Users/zw/code/C++_Projects/PlaneFinder/rply.h

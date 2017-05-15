@@ -16,11 +16,13 @@ add_executable(planeFinder
         SimplePly.cpp
         rply.h
         rply.c
-        Plane.cpp Plane.h)
+        Plane.cpp Plane.h
+        PCA.cpp PCA.h)
 
 
 # playground
 add_executable(playground playground.cpp SimplePly.h
         SimplePly.cpp
         rply.h
-        rply.c)
+        rply.c
+        PCA.cpp PCA.h)
