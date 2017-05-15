@@ -126,11 +126,11 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/PCA.cpp">
+		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp">
 			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>
-		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/PCA.h">
+		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/Patch.h">
 			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>

@@ -2,7 +2,7 @@
 // Created by zwpdbh on 06/05/2017.
 //
 
-#include "PCA.h"
+#include "Patch.h"
 #include <iostream>
 #include <Eigen/Dense>
 #include <map>
@@ -42,13 +42,14 @@ int main(int argc, char *argv[]) {
     }
     std::cout << "Read " << ply.size() << " points" << std::endl;
 
-    vector<PlyPoint *> testData;
-    for (unsigned long i = 0; i < 100; i++) {
-        testData.push_back(&ply[i]);
-    }
-    PCA pca(testData);
-    cout << pca.eigenvalues << endl;
-    cout << pca.eigenvectors << endl;
+
+//    vector<PlyPoint *> testData;
+//    for (unsigned long i = 0; i < 100; i++) {
+//        testData.push_back(&ply[i]);
+//    }
+//    Patch pca(testData);
+//    cout << pca.eigenvalues << endl;
+//    cout << pca.eigenvectors << endl;
 
 
 
@@ -65,20 +66,20 @@ int main(int argc, char *argv[]) {
 
 
 
-//    vector<PlyPoint *> patch;
-//    unsigned long size = ply.size() / 10000;
-//    cout << size << endl;
-//
-//    for (unsigned long i = 0; i < ply.size(); i++) {
-//        if (patch.size() == size) {
-//            PCA pca(patch);
-//            cout << endl;
-//            cout << pca.cov.eigenvalues() << endl;
-//            cout << endl;
-//            patch.clear();
-//        }
-//        patch.push_back(&ply[i]);
-//    }
+    vector<PlyPoint *> patch;
+    unsigned long size = ply.size() / 10000;
+    cout << size << endl;
+
+    for (unsigned long i = 0; i < ply.size(); i++) {
+        if (patch.size() == size) {
+            Patch pca(patch);
+            cout << endl;
+            cout << pca.eigenvectors.real() << endl;
+            cout << endl;
+            patch.clear();
+        }
+        patch.push_back(&ply[i]);
+    }
 
     return 0;
 }

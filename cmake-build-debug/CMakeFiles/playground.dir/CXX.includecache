@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/Users/zw/code/C++_Projects/PlaneFinder/PCA.cpp
-PCA.h
-/Users/zw/code/C++_Projects/PlaneFinder/PCA.h
+/Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp
+Patch.h
+/Users/zw/code/C++_Projects/PlaneFinder/Patch.h
 iostream
 -
 Eigen/Eigenvalues
 -
 
-/Users/zw/code/C++_Projects/PlaneFinder/PCA.h
+/Users/zw/code/C++_Projects/PlaneFinder/Patch.h
 SimplePly.h
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
 Eigen/Eigenvalues
@@ -39,8 +39,8 @@ string
 -
 
 /Users/zw/code/C++_Projects/PlaneFinder/playground.cpp
-PCA.h
-/Users/zw/code/C++_Projects/PlaneFinder/PCA.h
+Patch.h
+/Users/zw/code/C++_Projects/PlaneFinder/Patch.h
 iostream
 -
 Eigen/Dense

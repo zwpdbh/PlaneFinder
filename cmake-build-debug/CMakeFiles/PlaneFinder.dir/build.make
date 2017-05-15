@@ -153,28 +153,28 @@ CMakeFiles/planeFinder.dir/Plane.cpp.o.provides: CMakeFiles/planeFinder.dir/Plan
 CMakeFiles/planeFinder.dir/Plane.cpp.o.provides.build: CMakeFiles/planeFinder.dir/Plane.cpp.o
 
 
-CMakeFiles/planeFinder.dir/PCA.cpp.o: CMakeFiles/planeFinder.dir/flags.make
-CMakeFiles/planeFinder.dir/PCA.cpp.o: ../PCA.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/planeFinder.dir/PCA.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/planeFinder.dir/PCA.cpp.o -c /Users/zw/code/C++_Projects/PlaneFinder/PCA.cpp
+CMakeFiles/planeFinder.dir/Patch.cpp.o: CMakeFiles/planeFinder.dir/flags.make
+CMakeFiles/planeFinder.dir/Patch.cpp.o: ../Patch.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/planeFinder.dir/Patch.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/planeFinder.dir/Patch.cpp.o -c /Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp
 
-CMakeFiles/planeFinder.dir/PCA.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/planeFinder.dir/PCA.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zw/code/C++_Projects/PlaneFinder/PCA.cpp > CMakeFiles/planeFinder.dir/PCA.cpp.i
+CMakeFiles/planeFinder.dir/Patch.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/planeFinder.dir/Patch.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp > CMakeFiles/planeFinder.dir/Patch.cpp.i
 
-CMakeFiles/planeFinder.dir/PCA.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/planeFinder.dir/PCA.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zw/code/C++_Projects/PlaneFinder/PCA.cpp -o CMakeFiles/planeFinder.dir/PCA.cpp.s
+CMakeFiles/planeFinder.dir/Patch.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/planeFinder.dir/Patch.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp -o CMakeFiles/planeFinder.dir/Patch.cpp.s
 
-CMakeFiles/planeFinder.dir/PCA.cpp.o.requires:
+CMakeFiles/planeFinder.dir/Patch.cpp.o.requires:
 
-.PHONY : CMakeFiles/planeFinder.dir/PCA.cpp.o.requires
+.PHONY : CMakeFiles/planeFinder.dir/Patch.cpp.o.requires
 
-CMakeFiles/planeFinder.dir/PCA.cpp.o.provides: CMakeFiles/planeFinder.dir/PCA.cpp.o.requires
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/PCA.cpp.o.provides.build
-.PHONY : CMakeFiles/planeFinder.dir/PCA.cpp.o.provides
+CMakeFiles/planeFinder.dir/Patch.cpp.o.provides: CMakeFiles/planeFinder.dir/Patch.cpp.o.requires
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Patch.cpp.o.provides.build
+.PHONY : CMakeFiles/planeFinder.dir/Patch.cpp.o.provides
 
-CMakeFiles/planeFinder.dir/PCA.cpp.o.provides.build: CMakeFiles/planeFinder.dir/PCA.cpp.o
+CMakeFiles/planeFinder.dir/Patch.cpp.o.provides.build: CMakeFiles/planeFinder.dir/Patch.cpp.o
 
 
 # Object files for target planeFinder
@@ -183,7 +183,7 @@ planeFinder_OBJECTS = \
 "CMakeFiles/planeFinder.dir/SimplePly.cpp.o" \
 "CMakeFiles/planeFinder.dir/rply.c.o" \
 "CMakeFiles/planeFinder.dir/Plane.cpp.o" \
-"CMakeFiles/planeFinder.dir/PCA.cpp.o"
+"CMakeFiles/planeFinder.dir/Patch.cpp.o"
 
 # External object files for target planeFinder
 planeFinder_EXTERNAL_OBJECTS =
@@ -192,7 +192,7 @@ planeFinder: CMakeFiles/planeFinder.dir/planeFinder.cpp.o
 planeFinder: CMakeFiles/planeFinder.dir/SimplePly.cpp.o
 planeFinder: CMakeFiles/planeFinder.dir/rply.c.o
 planeFinder: CMakeFiles/planeFinder.dir/Plane.cpp.o
-planeFinder: CMakeFiles/planeFinder.dir/PCA.cpp.o
+planeFinder: CMakeFiles/planeFinder.dir/Patch.cpp.o
 planeFinder: CMakeFiles/planeFinder.dir/build.make
 planeFinder: CMakeFiles/planeFinder.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable planeFinder"
@@ -207,7 +207,7 @@ CMakeFiles/planeFinder.dir/requires: CMakeFiles/planeFinder.dir/planeFinder.cpp.
 CMakeFiles/planeFinder.dir/requires: CMakeFiles/planeFinder.dir/SimplePly.cpp.o.requires
 CMakeFiles/planeFinder.dir/requires: CMakeFiles/planeFinder.dir/rply.c.o.requires
 CMakeFiles/planeFinder.dir/requires: CMakeFiles/planeFinder.dir/Plane.cpp.o.requires
-CMakeFiles/planeFinder.dir/requires: CMakeFiles/planeFinder.dir/PCA.cpp.o.requires
+CMakeFiles/planeFinder.dir/requires: CMakeFiles/planeFinder.dir/Patch.cpp.o.requires
 
 .PHONY : CMakeFiles/planeFinder.dir/requires
 

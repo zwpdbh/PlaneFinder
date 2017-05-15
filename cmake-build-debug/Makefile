@@ -136,35 +136,35 @@ planeFinder/fast:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/build
 .PHONY : planeFinder/fast
 
-PCA.o: PCA.cpp.o
+Patch.o: Patch.cpp.o
 
-.PHONY : PCA.o
+.PHONY : Patch.o
 
 # target to build an object file
-PCA.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/PCA.cpp.o
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/PCA.cpp.o
-.PHONY : PCA.cpp.o
+Patch.cpp.o:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Patch.cpp.o
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Patch.cpp.o
+.PHONY : Patch.cpp.o
 
-PCA.i: PCA.cpp.i
+Patch.i: Patch.cpp.i
 
-.PHONY : PCA.i
+.PHONY : Patch.i
 
 # target to preprocess a source file
-PCA.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/PCA.cpp.i
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/PCA.cpp.i
-.PHONY : PCA.cpp.i
+Patch.cpp.i:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Patch.cpp.i
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Patch.cpp.i
+.PHONY : Patch.cpp.i
 
-PCA.s: PCA.cpp.s
+Patch.s: Patch.cpp.s
 
-.PHONY : PCA.s
+.PHONY : Patch.s
 
 # target to generate assembly for a file
-PCA.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/PCA.cpp.s
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/PCA.cpp.s
-.PHONY : PCA.cpp.s
+Patch.cpp.s:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Patch.cpp.s
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Patch.cpp.s
+.PHONY : Patch.cpp.s
 
 Plane.o: Plane.cpp.o
 
@@ -317,9 +317,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... playground"
 	@echo "... planeFinder"
-	@echo "... PCA.o"
-	@echo "... PCA.i"
-	@echo "... PCA.s"
+	@echo "... Patch.o"
+	@echo "... Patch.i"
+	@echo "... Patch.s"
 	@echo "... Plane.o"
 	@echo "... Plane.i"
 	@echo "... Plane.s"

@@ -3,7 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/planeFinder.dir/SimplePly.cpp.o"
   "CMakeFiles/planeFinder.dir/rply.c.o"
   "CMakeFiles/planeFinder.dir/Plane.cpp.o"
-  "CMakeFiles/planeFinder.dir/PCA.cpp.o"
+  "CMakeFiles/planeFinder.dir/Patch.cpp.o"
   "planeFinder.pdb"
   "planeFinder"
 )
