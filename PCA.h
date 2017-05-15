@@ -6,12 +6,16 @@
 #define PLANEFINDER_PCA_H
 
 #include "SimplePly.h"
+#include <Eigen/Eigenvalues>
 
 class PCA {
+
 public:
     PCA() {};
     PCA(std::vector<PlyPoint *>);
     Eigen::Matrix3d cov;
+    Eigen::EigenSolver<Eigen::Matrix3d>::EigenvalueType  eigenvalues;
+    Eigen::EigenSolver<Eigen::Matrix3d>::EigenvectorsType eigenvectors;
 
 private:
     double computeMean(std::vector<double> *d);

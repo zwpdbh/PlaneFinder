@@ -29,18 +29,18 @@ void centerDataAtZero(std::vector<double> *d) {
 int main(int argc, char *argv[]) {
 
 
-    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
-
-    // Storage for the point cloud.
-    SimplePly ply;
-
-    // Read in the data from a PLY file
-    std::cout << "Reading PLY data from " << inputFile << std::endl;
-    if (!ply.read(inputFile)) {
-        std::cout << "Could not read PLY data from file " << inputFile << std::endl;
-        return -1;
-    }
-    std::cout << "Read " << ply.size() << " points" << std::endl;
+//    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
+//
+//    // Storage for the point cloud.
+//    SimplePly ply;
+//
+//    // Read in the data from a PLY file
+//    std::cout << "Reading PLY data from " << inputFile << std::endl;
+//    if (!ply.read(inputFile)) {
+//        std::cout << "Could not read PLY data from file " << inputFile << std::endl;
+//        return -1;
+//    }
+//    std::cout << "Read " << ply.size() << " points" << std::endl;
 
 
 
@@ -58,27 +58,32 @@ int main(int argc, char *argv[]) {
 //    centerDataAtZero(&data);
 //    cout << data.at(0) << " "  << data.at(1) << " "  << data.at(2) << endl;
 
-//    Eigen::Matrix3d cov;
-//    cov << 1, 2, 3,
-//            4, 5, 6,
-//            7, 8, 9;
+    Eigen::Matrix3d cov;
+    cov << 1, 2, 3,
+            4, 5, 6,
+            7, 8, 9;
+
+    Eigen::EigenSolver<Eigen::Matrix3d> solver(cov);
+
+    cout << solver.eigenvectors().real() << endl;
+
+    cout << solver.eigenvectors().col(0) << endl;
+
+
+//    vector<PlyPoint *> patch;
+//    unsigned long size = ply.size() / 10000;
+//    cout << size << endl;
 //
-//    cout << cov.eigenvalues() << endl;
-
-
-    unsigned long counter = 0;
-    vector<PlyPoint *> patch;
-    for (unsigned long i = 0; i < ply.size(); i++) {
-        if (patch.size() == 100) {
-            PCA pca(patch);
-            cout << endl;
-            cout << pca.cov.eigenvalues() << endl;
-            cout << endl;
-            patch.clear();
-        }
-        patch.push_back(&ply[i]);
-    }
-
+//    for (unsigned long i = 0; i < ply.size(); i++) {
+//        if (patch.size() == size) {
+//            PCA pca(patch);
+//            cout << endl;
+//            cout << pca.cov.eigenvalues() << endl;
+//            cout << endl;
+//            patch.clear();
+//        }
+//        patch.push_back(&ply[i]);
+//    }
 
     return 0;
 }

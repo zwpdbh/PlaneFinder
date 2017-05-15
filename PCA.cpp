@@ -4,6 +4,7 @@
 
 #include "PCA.h"
 #include <iostream>
+#include <Eigen/Eigenvalues>
 
 using namespace std;
 
@@ -35,6 +36,11 @@ PCA::PCA(std::vector<PlyPoint *> points) {
             this->cov(i, j) = computeCovariance(data.at(i), data.at(j));
         }
     }
+
+    // 3. computer eigenvalues and eigenvectors
+    Eigen::EigenSolver<Eigen::Matrix3d> solver(this->cov);
+    this->eigenvalues = solver.eigenvalues().real();
+    this->eigenvectors = solver.eigenvectors().real();
 
 }
 
@@ -72,3 +78,4 @@ void PCA::centerDataAtZero(std::vector<double> *d) {
         d->at(i) = d->at(i) - mean;
     }
 }
+
