@@ -29,45 +29,40 @@ void centerDataAtZero(std::vector<double> *d) {
 int main(int argc, char *argv[]) {
 
 
-//    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
+    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
+
+    // Storage for the point cloud.
+    SimplePly ply;
+
+    // Read in the data from a PLY file
+    std::cout << "Reading PLY data from " << inputFile << std::endl;
+    if (!ply.read(inputFile)) {
+        std::cout << "Could not read PLY data from file " << inputFile << std::endl;
+        return -1;
+    }
+    std::cout << "Read " << ply.size() << " points" << std::endl;
+
+    vector<PlyPoint *> testData;
+    for (unsigned long i = 0; i < 100; i++) {
+        testData.push_back(&ply[i]);
+    }
+    PCA pca(testData);
+    cout << pca.eigenvalues << endl;
+    cout << pca.eigenvectors << endl;
+
+
+
+
+//    Eigen::Matrix2d cov;
+//    cov << 6, -1,
+//            2, 3;
 //
-//    // Storage for the point cloud.
-//    SimplePly ply;
+//    Eigen::EigenSolver<Eigen::Matrix2d> solver(cov);
 //
-//    // Read in the data from a PLY file
-//    std::cout << "Reading PLY data from " << inputFile << std::endl;
-//    if (!ply.read(inputFile)) {
-//        std::cout << "Could not read PLY data from file " << inputFile << std::endl;
-//        return -1;
-//    }
-//    std::cout << "Read " << ply.size() << " points" << std::endl;
+//    cout << solver.eigenvalues().real() << endl;
+//    cout << solver.eigenvectors().real() << endl;
+//    cout << solver.eigenvectors().real().col(0) << endl;
 
-
-
-
-//
-//    Eigen::Vector3d point = ply[1].location;
-//    cout << point << endl;
-//    cout << point[0] << endl;
-
-//    vector<double> data;
-//    data.push_back(0.1);
-//    data.push_back(0.2);
-//    data.push_back(0.3);
-//
-//    centerDataAtZero(&data);
-//    cout << data.at(0) << " "  << data.at(1) << " "  << data.at(2) << endl;
-
-    Eigen::Matrix3d cov;
-    cov << 1, 2, 3,
-            4, 5, 6,
-            7, 8, 9;
-
-    Eigen::EigenSolver<Eigen::Matrix3d> solver(cov);
-
-    cout << solver.eigenvectors().real() << endl;
-
-    cout << solver.eigenvectors().col(0) << endl;
 
 
 //    vector<PlyPoint *> patch;

@@ -20,10 +20,10 @@ PCA::PCA(std::vector<PlyPoint *> points) {
         zDimension.push_back(points.at(i)->location[2]);
     }
 
-    // 1. center the data at zero
-    centerDataAtZero(&xDimension);
-    centerDataAtZero(&yDimension);
-    centerDataAtZero(&yDimension);
+//    // 1. center the data at zero, I don't need to center it.
+//    centerDataAtZero(&xDimension);
+//    centerDataAtZero(&yDimension);
+//    centerDataAtZero(&yDimension);
 
     vector<vector<double> *> data;
     data.push_back(&xDimension);
@@ -39,8 +39,8 @@ PCA::PCA(std::vector<PlyPoint *> points) {
 
     // 3. computer eigenvalues and eigenvectors
     Eigen::EigenSolver<Eigen::Matrix3d> solver(this->cov);
-    this->eigenvalues = solver.eigenvalues().real();
-    this->eigenvectors = solver.eigenvectors().real();
+    this->eigenvalues = solver.eigenvalues();
+    this->eigenvectors = solver.eigenvectors();
 
 }
 
