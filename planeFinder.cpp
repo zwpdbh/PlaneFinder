@@ -40,14 +40,14 @@ int main(int argc, char *argv[]) {
 //  double threshold = atof(argv[4]);
 //  int nTrials = atoi(argv[5]);
 
-    int nPlanes = 5;
-    double threshold = 0.05;
+    int nPlanes = 10;
+    double threshold = 0.01;
     double expectedOutlierRatio = 0.95;
-    double expectedSuccessfulRate = 0.95;
+    double expectedSuccessfulRate = 0.99;
     int minNumOfSampleNeeded = 3;
     int nTrials = (int) (log(1 - expectedSuccessfulRate) / log(1 - pow((1 - expectedOutlierRatio), minNumOfSampleNeeded)));
 
-    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
+    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/office.ply";
     string outputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/output_adzePoints.ply";
 
 
