@@ -134,6 +134,7 @@ static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &
         for (unsigned long j = i + 1; j < size; j++) {
             Cluster *clusterJ = clusters[j];
             double currentDistance = dissimilarityBetween(clusterI, clusterJ);
+            cout << "current distance between " << i << " and " << j << " is: " << currentDistance << endl;
             if (minDistance < currentDistance) {
                 minDistance = currentDistance;
                 minPair.distance = minDistance;
@@ -153,7 +154,7 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
     long c = 0;
 
     for (long i = 0; i < ply.size(); i++) {
-        if (groupOfPoints.size() > 100) {
+        if (groupOfPoints.size() > 200) {
             Cluster cluster(ply, groupOfPoints);
             clusters[c] = &cluster;
             c += 1;
@@ -167,6 +168,11 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
     double threshold = 0.02;
     do {
         MinPair minPair = minDistanceAmongAllClusters(clusters);
+        cout << "The min distance is between: "
+             << minPair.i << " and " << minPair.j
+             << " = " << minPair.distance << endl;
+
+
         if (minPair.distance > threshold) {
             break;
         } else {
@@ -188,6 +194,8 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
 
             // remove the clusters for clusterI and clusterJ
             clusters.erase(minPair.j);
+            cout << "After merging " << minPair.i << ", " << minPair.j << ", the current clusters' size is: "
+                 << clusters.size() << endl;
         }
     } while (true);
 

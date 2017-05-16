@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
+
 //
 //    RANSAC ransac(10, 0.05, 0.95, 0.99);
 //    ransac.fitPlyPoints(ply);
