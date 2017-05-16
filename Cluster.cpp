@@ -116,8 +116,8 @@ double dissimilarityBetween(Cluster &c1, Cluster &c2) {
 }
 
 struct MinPair {
-    unsigned long i;
-    unsigned long j;
+    long i;
+    long j;
     double distance;
 };
 
@@ -127,26 +127,24 @@ struct MinPair {
  */
 static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster> &clusters) {
     cout << endl;
-    cout << "computing the min distance among clusters, size: " << clusters.size() << endl;
-
+//    cout << "computing the min distance among clusters, size: " << clusters.size() << endl;
+    cout << "the size of current clusters before computing is: " << clusters.size() << endl;
     MinPair minPair = {};
     double minDistance = 100000000;
     // compute all pairs of clusters' distance
     unsigned long size = clusters.size();
-    for (unsigned long i = 0; i < size; i++) {
-        Cluster clusterI = clusters[i];
-        for (unsigned long j = i + 1; j < size; j++) {
-            Cluster clusterJ = clusters[j];
-            double currentDistance = dissimilarityBetween(clusterI, clusterJ);
-            if (currentDistance < minDistance) {
-//                cout << "minDistance = " << minDistance << endl;
-//                cout << "current distance = " << currentDistance << endl;
-//                cout << "\n" << endl;
 
-                minDistance = currentDistance;
-                minPair.distance = minDistance;
-                minPair.i = i;
-                minPair.j = j;
+
+    for (auto ci = clusters.begin(); ci != clusters.end(); ci++) {
+        for (auto cj = clusters.begin(); cj != clusters.end(); cj++) {
+            if (ci->first != cj->first) {
+                double currentDistance = dissimilarityBetween(ci->second, cj->second);
+                if (currentDistance < minDistance) {
+                    minDistance = currentDistance;
+                    minPair.distance = minDistance;
+                    minPair.i = ci->first;
+                    minPair.j = cj->first;
+                }
             }
         }
     }
@@ -154,6 +152,7 @@ static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster> &cl
     cout << "The min distance is between: "
          << minPair.i << " and " << minPair.j
          << " = " << minPair.distance << endl;
+    cout << "the size of current clusters after computing is: " << clusters.size() << endl;
     cout << endl;
 
     return minPair;
