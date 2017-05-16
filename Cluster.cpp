@@ -115,30 +115,54 @@ double dissimilarityBetween(Cluster &c1, Cluster &c2) {
     return distance;
 }
 
+double computeDistanceAmongTwoPoints(PlyPoint &p1, PlyPoint &p2) {
+    Eigen::Vector3d d = p1.location - p2.location;
+    return sqrt(d.dot(d));
+}
+
+
+double closestDistanceBetweenTwoClusters(Cluster &c1, Cluster &c2, SimplePly &ply) {
+    double distance = 1000000;
+
+    for (int i = 0; i < c1.points.size(); i++) {
+        for (int j = 0; j< c2.points.size(); j++) {
+            double currentDistance = computeDistanceAmongTwoPoints(ply[c1.points[i]], ply[c2.points[j]]);
+            if (currentDistance < distance) {
+                distance = currentDistance;
+            }
+        }
+    }
+    return distance;
+}
+
+
 struct MinPair {
     long i;
     long j;
-    double distance;
+    double differences;
 };
 
 /**
  * compute the min distance among all the pairs of clusters
  * @param clusters a pointer to unordered map
  */
-static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster> &clusters) {
+static MinPair minDifferencesAmongClusters(std::unordered_map<long, Cluster> &clusters, SimplePly &ply, double neighbourDistanceConstraint) {
     MinPair minPair = {};
-    double minDistance = 100000000;
-    // compute all pairs of clusters' distance
+    double minDifferences = 100000000;
+    // compute all pairs of clusters' differences
     unsigned long size = clusters.size();
 
 
     for (auto ci = clusters.begin(); ci != clusters.end(); ci++) {
         for (auto cj = clusters.begin(); cj != clusters.end(); cj++) {
             if (ci->first != cj->first) {
-                double currentDistance = dissimilarityBetween(ci->second, cj->second);
-                if (currentDistance < minDistance) {
-                    minDistance = currentDistance;
-                    minPair.distance = minDistance;
+                if (closestDistanceBetweenTwoClusters(ci->second, cj->second, ply) > neighbourDistanceConstraint) {
+                    continue;
+                }
+                double currentDifferences = dissimilarityBetween(ci->second, cj->second);
+                if (currentDifferences < minDifferences) {
+                    minDifferences = currentDifferences;
+                    minPair.differences = minDifferences;
                     minPair.i = ci->first;
                     minPair.j = cj->first;
                 }
@@ -173,9 +197,12 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
 
 
     double threshold = 2;
+    double neighbourDistanceConstraint = 0.02;
+
     do {
-        MinPair minPair = minDistanceAmongAllClusters(clusters);
-        if (minPair.distance > threshold) {
+
+        MinPair minPair = minDifferencesAmongClusters(clusters, ply, neighbourDistanceConstraint);
+        if (minPair.differences > threshold) {
             break;
         }
 
@@ -199,7 +226,7 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
         Cluster mergedCluster(ply, tmp);
         clusters[minPair.i] = mergedCluster;
         cout << "After merging clusters: (" << minPair.i << ", " << minPair.j
-             << ") with min distance = " << minPair.distance
+             << ") with min differences = " << minPair.differences
              << ", the current clusters' size is: " << clusters.size() << endl;
 
     } while (true);

@@ -55,7 +55,7 @@ private:
     double computeMean(std::vector<double> *d);
     double computeCovariance(std::vector<double> *d1, std::vector<double> *d2);
     void centerDataAtZero(std::vector<double> *d);
-//    static double minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &clusters);
+//    static double minDifferencesAmongClusters(std::unordered_map<long, Cluster *> &clusters);
 };
 
 
