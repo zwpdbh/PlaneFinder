@@ -9,6 +9,11 @@
 #include <Eigen/Eigenvalues>
 #include <unordered_map>
 
+
+/**
+ * Each Cluster represent a group of points, represented by a vector<long> which holds
+ * the point index in a Simply.
+ */
 class Cluster {
 
 public:
@@ -16,9 +21,10 @@ public:
      * constructors
      */
     Cluster() {};
-    Cluster(std::vector<PlyPoint *>);
+    Cluster(SimplePly &ply, std::vector<long> &points);
 
-    std::vector<PlyPoint *> points;
+    // holds the groups of indexes which associated with PlyPoint in Simply
+    std::vector<long> points;
 
     /**
      * my covariance matrix, the most variation component, centroid.

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Cluster::Cluster(std::vector<PlyPoint *> points) {
+Cluster::Cluster(SimplePly &ply, vector<long> &points) {
     this->points = points;
 
 //    points.at(1)->location.
@@ -17,9 +17,9 @@ Cluster::Cluster(std::vector<PlyPoint *> points) {
     vector<double> zDimension;
 
     for (unsigned long i = 0; i < this->points.size(); i++) {
-        xDimension.push_back(this->points.at(i)->location[0]);
-        yDimension.push_back(this->points.at(i)->location[1]);
-        zDimension.push_back(this->points.at(i)->location[2]);
+        xDimension.push_back(ply[this->points[i]].location[0]);
+        yDimension.push_back(ply[this->points[i]].location[1]);
+        zDimension.push_back(ply[this->points[i]].location[2]);
     }
 
 
@@ -127,7 +127,7 @@ struct MinPair {
  */
 static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &clusters) {
     MinPair minPair = {};
-    double minDistance = numeric_limits::max();
+    double minDistance = 100000000;
     // compute all pairs of clusters' distance
     unsigned long size = clusters.size();
     for (unsigned long i = 0; i < size; i++) {
@@ -150,17 +150,17 @@ static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &
 
 void Cluster::agglomerativeClustering(SimplePly &ply) {
     unordered_map<long, Cluster *> clusters;
-    vector<PlyPoint *> groupOfPoints;
+    vector<long> groupOfPoints;
     long c = 0;
 
-    for (int i = 0; i < ply.size(); i++) {
+    for (long i = 0; i < ply.size(); i++) {
         if (groupOfPoints.size() > 100) {
-            Cluster cluster(groupOfPoints);
+            Cluster cluster(ply, groupOfPoints);
             clusters[c] = &cluster;
             c += 1;
             groupOfPoints.clear();
         }
-        groupOfPoints.push_back(&ply[i]);
+        groupOfPoints.push_back(i);
     }
 
     cout << "The initial size of clusters is: " << clusters.size() << endl;
@@ -175,25 +175,25 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
             Cluster *clusterJ = clusters[minPair.j];
 
             // merge these two cluster
-            vector<PlyPoint *> tmp;
-            for (PlyPoint *each :clusterI->points) {
+            vector<long> tmp;
+            for (long each :clusterI->points) {
                 tmp.push_back(each);
             }
-            for (PlyPoint *each :clusterJ->points) {
+            for (long each :clusterJ->points) {
                 tmp.push_back(each);
             }
+
+            // add the merged new cluster
+            Cluster mergedCluster(ply, tmp);
+            clusters[minPair.i] = &mergedCluster;
 
             // remove the clusters for clusterI and clusterJ
             clusters.erase(minPair.j);
-
-            // add the merged new cluster
-            Cluster mergedCluster(tmp);
-            clusters[minPair.i] = &mergedCluster;
         }
     } while (true);
 
     cout << "After agglomerative clustering, the size of clusters reduced to : "
-         << clusters.size() << end;
+         << clusters.size() << endl;
 
 
     // colour the points based on cluster
@@ -209,13 +209,16 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
         colours.push_back(Eigen::Vector3i(153, 204, 255));
     }
 
-
+    int count = 0;
     for (auto it = clusters.begin(); it != clusters.end(); it++) {
-//        for (int i = 0; i < ; ++i) {
-//
-//        }
+        cout << "The " << count + 1 << "th cluster's size = " << it->second->points.size()
+             << "percentage: " << (double) it->second->points.size() / ply.size() << endl;
+        Eigen::Vector3i colour = colours[count];
+        for (long index: it->second->points) {
+            ply[index].colour = colour;
+        }
+        count += 1;
     }
-
 }
 
 
