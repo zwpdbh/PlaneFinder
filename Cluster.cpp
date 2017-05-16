@@ -126,9 +126,6 @@ struct MinPair {
  * @param clusters a pointer to unordered map
  */
 static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster> &clusters) {
-    cout << endl;
-//    cout << "computing the min distance among clusters, size: " << clusters.size() << endl;
-    cout << "the size of current clusters before computing is: " << clusters.size() << endl;
     MinPair minPair = {};
     double minDistance = 100000000;
     // compute all pairs of clusters' distance
@@ -149,12 +146,6 @@ static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster> &cl
         }
     }
 
-    cout << "The min distance is between: "
-         << minPair.i << " and " << minPair.j
-         << " = " << minPair.distance << endl;
-    cout << "the size of current clusters after computing is: " << clusters.size() << endl;
-    cout << endl;
-
     return minPair;
 }
 
@@ -166,7 +157,7 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
     long c = 0;
     int count = 0;
 
-    int clusterSize = 500;
+    int clusterSize = 700;
 
     for (long i = 0; i < ply.size(); i++) {
         if (groupOfPoints.size() > clusterSize) {
@@ -201,21 +192,17 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
         }
 
 
-        cout << "current clusters size: " << clusters.size() << endl;
         // remove the clusters for clusterI and clusterJ
         clusters.erase(minPair.j);
         clusters.erase(minPair.i);
-        cout << "after deleting two clusters, new size: " << clusters.size() << endl;
         // add the merged new cluster
         Cluster mergedCluster(ply, tmp);
         clusters[minPair.i] = mergedCluster;
-        cout << "After merging " << minPair.i << ", " << minPair.j
+        cout << "After merging clusters: (" << minPair.i << ", " << minPair.j
+             << ") with min distance = " << minPair.distance
              << ", the current clusters' size is: " << clusters.size() << endl;
 
     } while (true);
-
-    cout << "After agglomerative clustering, the size of clusters reduced to : "
-         << clusters.size() << endl;
 
 
     // colour the points based on cluster
