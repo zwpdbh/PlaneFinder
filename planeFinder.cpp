@@ -89,8 +89,11 @@ int main(int argc, char *argv[]) {
 
     vector<Plane> planes;
 
-
-    for (int i = 0; i < nPlanes; ++i) {
+    /**
+     * RANSAC fitting
+     */
+    int i = 0;
+    while ((double) fittedSize / totalSize < 0.95 || i < nPlanes) {
         vector<long> bestInliers;
         Plane bestPlane;
         nTrials = updateNumOfTrials(expectedSuccessfulRate, expectedOutlierRatio, minNumOfSampleNeeded);
@@ -115,16 +118,14 @@ int main(int argc, char *argv[]) {
                 cout << "" << endl;
                 cout << "update best plane evaluation: " << inlierRatio << endl;
                 nTrials = updateNumOfTrials(expectedSuccessfulRate, updatedOutlierRatio, minNumOfSampleNeeded);
-//                r = r / 4;
                 cout << "update outlier ratio: " << updatedOutlierRatio << endl;
                 cout << "Update nTrials to: " << nTrials << endl;
             }
 
-
         }
 
-
         planes.push_back(bestPlane);
+        i += 1;
         fittedSize += bestPlane.inliers.size();
 
         // update plane color, also get rid of the fitted plane points
@@ -138,8 +139,7 @@ int main(int argc, char *argv[]) {
         }
         cout << "Fitted " << (double) fittedSize / totalSize << " of total points" << endl;
         cout << "After update data set, the rest data set size is: " << dataSet.size() << endl;
-    }
-
+    } // end of RANSAC fitting
 
     // summary
     cout << endl;
@@ -147,7 +147,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < planes.size(); ++i) {
         cout << "plane " << i+1 << " size: " << planes[i].inliers.size() << endl;
     }
-    cout << "Total points size: " << totalSize << ", fitted " << fittedSize << " , " << (double) fittedSize / totalSize << endl;
+    cout << "Total points size: " << totalSize << ", fitted points " << fittedSize << " , percentage = " << (double) fittedSize / totalSize << endl;
 
     // Write the resulting (re-coloured) point cloud to a PLY file.
     std::cout << "Writing PLY data to " << outputFile << std::endl;

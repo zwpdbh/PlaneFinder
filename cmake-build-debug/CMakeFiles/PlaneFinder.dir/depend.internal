@@ -5,9 +5,10 @@ CMakeFiles/planeFinder.dir/rply.c.o
  /Users/zw/code/C++_Projects/PlaneFinder/rply.c
  /Users/zw/code/C++_Projects/PlaneFinder/rply.h
  /Users/zw/code/C++_Projects/PlaneFinder/rplyfile.h
-CMakeFiles/planeFinder.dir/PCA.cpp.o
- /Users/zw/code/C++_Projects/PlaneFinder/PCA.cpp
- /Users/zw/code/C++_Projects/PlaneFinder/PCA.h
+CMakeFiles/planeFinder.dir/Cluster.cpp.o
+ /Users/zw/code/C++_Projects/PlaneFinder/Cluster.cpp
+ /Users/zw/code/C++_Projects/PlaneFinder/Cluster.h
+ /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
 CMakeFiles/planeFinder.dir/Plane.cpp.o
  /Users/zw/code/C++_Projects/PlaneFinder/Plane.cpp
  /Users/zw/code/C++_Projects/PlaneFinder/Plane.h

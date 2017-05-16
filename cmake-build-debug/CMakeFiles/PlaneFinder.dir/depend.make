@@ -5,8 +5,9 @@ CMakeFiles/planeFinder.dir/rply.c.o: ../rply.c
 CMakeFiles/planeFinder.dir/rply.c.o: ../rply.h
 CMakeFiles/planeFinder.dir/rply.c.o: ../rplyfile.h
 
-CMakeFiles/planeFinder.dir/PCA.cpp.o: ../PCA.cpp
-CMakeFiles/planeFinder.dir/PCA.cpp.o: ../PCA.h
+CMakeFiles/planeFinder.dir/Cluster.cpp.o: ../Cluster.cpp
+CMakeFiles/planeFinder.dir/Cluster.cpp.o: ../Cluster.h
+CMakeFiles/planeFinder.dir/Cluster.cpp.o: ../SimplePly.h
 
 CMakeFiles/planeFinder.dir/Plane.cpp.o: ../Plane.cpp
 CMakeFiles/planeFinder.dir/Plane.cpp.o: ../Plane.h
