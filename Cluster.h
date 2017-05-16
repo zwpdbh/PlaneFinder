@@ -7,6 +7,7 @@
 
 #include "SimplePly.h"
 #include <Eigen/Eigenvalues>
+#include <unordered_map>
 
 class Cluster {
 
@@ -16,6 +17,8 @@ public:
      */
     Cluster() {};
     Cluster(std::vector<PlyPoint *>);
+
+    std::vector<PlyPoint *> points;
 
     /**
      * my covariance matrix, the most variation component, centroid.
@@ -31,16 +34,10 @@ public:
     Eigen::EigenSolver<Eigen::Matrix3d>::EigenvalueType  eigenvalues;
     Eigen::EigenSolver<Eigen::Matrix3d>::EigenvectorsType eigenvectors;
 
-
-    /**
-     * compute the distance between two clusters, use it to do Agglomerative clustering
-     */
-    double distanceBetween(Cluster *c1, Cluster *c2);
-
     /**
      * agglomerative clustering
      */
-    static void agglomerativeClustering(SimplePly *);
+    static void agglomerativeClustering(SimplePly &ply);
 private:
     /**
      * helper functions
@@ -48,6 +45,7 @@ private:
     double computeMean(std::vector<double> *d);
     double computeCovariance(std::vector<double> *d1, std::vector<double> *d2);
     void centerDataAtZero(std::vector<double> *d);
+//    static double minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &clusters);
 };
 
 

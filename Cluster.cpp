@@ -4,19 +4,22 @@
 
 #include "Cluster.h"
 #include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
 Cluster::Cluster(std::vector<PlyPoint *> points) {
+    this->points = points;
+
 //    points.at(1)->location.
     vector<double> xDimension;
     vector<double> yDimension;
     vector<double> zDimension;
 
-    for (unsigned long i = 0; i < points.size(); i++) {
-        xDimension.push_back(points.at(i)->location[0]);
-        yDimension.push_back(points.at(i)->location[1]);
-        zDimension.push_back(points.at(i)->location[2]);
+    for (unsigned long i = 0; i < this->points.size(); i++) {
+        xDimension.push_back(this->points.at(i)->location[0]);
+        yDimension.push_back(this->points.at(i)->location[1]);
+        zDimension.push_back(this->points.at(i)->location[2]);
     }
 
 
@@ -100,19 +103,120 @@ void Cluster::centerDataAtZero(std::vector<double> *d) {
     }
 }
 
+
 /**
  * The distance between my two clusters is a measurement of how similar the two cluster are.
  * This is computed by comparing the similariy of two pairs of eigenvectors. These two pairs
  * eigenvectors are those contains the most variations (pick the two most variant dimention).
  */
-double Cluster::distanceBetween(Cluster *c1, Cluster *c2) {
+double dissimilarityBetween(Cluster *c1, Cluster *c2) {
     // compute the difference between their fist and second PCs
     double distance = pow(acos(c1->firstPC.dot(c1->firstPC)), 2) + pow(acos(c1->secondPC.dot(c2->secondPC)), 2);
-
     return distance;
 }
 
-void Cluster::agglomerativeClustering(SimplePly *) {
+struct MinPair {
+    unsigned long i;
+    unsigned long j;
+    double distance;
+};
 
+/**
+ * compute the min distance among all the pairs of clusters
+ * @param clusters a pointer to unordered map
+ */
+static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &clusters) {
+    MinPair minPair = {};
+    double minDistance = numeric_limits::max();
+    // compute all pairs of clusters' distance
+    unsigned long size = clusters.size();
+    for (unsigned long i = 0; i < size; i++) {
+        Cluster *clusterI = clusters[i];
+        for (unsigned long j = i + 1; j < size; j++) {
+            Cluster *clusterJ = clusters[j];
+            double currentDistance = dissimilarityBetween(clusterI, clusterJ);
+            if (minDistance < currentDistance) {
+                minDistance = currentDistance;
+                minPair.distance = minDistance;
+                minPair.i = i;
+                minPair.j = j;
+            }
+        }
+    }
+    return minPair;
+}
+
+
+
+void Cluster::agglomerativeClustering(SimplePly &ply) {
+    unordered_map<long, Cluster *> clusters;
+    vector<PlyPoint *> groupOfPoints;
+    long c = 0;
+
+    for (int i = 0; i < ply.size(); i++) {
+        if (groupOfPoints.size() > 100) {
+            Cluster cluster(groupOfPoints);
+            clusters[c] = &cluster;
+            c += 1;
+            groupOfPoints.clear();
+        }
+        groupOfPoints.push_back(&ply[i]);
+    }
+
+    cout << "The initial size of clusters is: " << clusters.size() << endl;
+
+    double threshold = 0.02;
+    do {
+        MinPair minPair = minDistanceAmongAllClusters(clusters);
+        if (minPair.distance > threshold) {
+            break;
+        } else {
+            Cluster *clusterI = clusters[minPair.i];
+            Cluster *clusterJ = clusters[minPair.j];
+
+            // merge these two cluster
+            vector<PlyPoint *> tmp;
+            for (PlyPoint *each :clusterI->points) {
+                tmp.push_back(each);
+            }
+            for (PlyPoint *each :clusterJ->points) {
+                tmp.push_back(each);
+            }
+
+            // remove the clusters for clusterI and clusterJ
+            clusters.erase(minPair.j);
+
+            // add the merged new cluster
+            Cluster mergedCluster(tmp);
+            clusters[minPair.i] = &mergedCluster;
+        }
+    } while (true);
+
+    cout << "After agglomerative clustering, the size of clusters reduced to : "
+         << clusters.size() << end;
+
+
+    // colour the points based on cluster
+
+    vector<Eigen::Vector3i> colours;
+    for (int i = 0; i < 8; i++) {
+        colours.push_back(Eigen::Vector3i(204, 51, 255));
+        colours.push_back(Eigen::Vector3i(255, 102, 102));
+        colours.push_back(Eigen::Vector3i(230, 0, 172));
+        colours.push_back(Eigen::Vector3i(255, 255, 0));
+        colours.push_back(Eigen::Vector3i(0, 204, 0));
+        colours.push_back(Eigen::Vector3i(198, 140, 83));
+        colours.push_back(Eigen::Vector3i(153, 204, 255));
+    }
+
+
+    for (auto it = clusters.begin(); it != clusters.end(); it++) {
+//        for (int i = 0; i < ; ++i) {
+//
+//        }
+    }
 
 }
+
+
+
