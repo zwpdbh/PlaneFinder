@@ -111,3 +111,8 @@ double Cluster::distanceBetween(Cluster *c1, Cluster *c2) {
 
     return distance;
 }
+
+void Cluster::agglomerativeClustering(SimplePly *) {
+
+
+}

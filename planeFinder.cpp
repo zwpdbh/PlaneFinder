@@ -149,6 +149,7 @@ int main(int argc, char *argv[]) {
     }
     cout << "Total points size: " << totalSize << ", fitted points " << fittedSize << " , percentage = " << (double) fittedSize / totalSize << endl;
 
+
     // Write the resulting (re-coloured) point cloud to a PLY file.
     std::cout << "Writing PLY data to " << outputFile << std::endl;
     if (!ply.write(outputFile)) {

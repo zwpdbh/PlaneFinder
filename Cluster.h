@@ -37,7 +37,10 @@ public:
      */
     double distanceBetween(Cluster *c1, Cluster *c2);
 
-
+    /**
+     * agglomerative clustering
+     */
+    static void agglomerativeClustering(SimplePly *);
 private:
     /**
      * helper functions
