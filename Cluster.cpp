@@ -157,7 +157,7 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
     long c = 0;
     int count = 0;
 
-    int clusterSize = 700;
+    int clusterSize = 20;
 
     for (long i = 0; i < ply.size(); i++) {
         if (groupOfPoints.size() > clusterSize) {
@@ -172,7 +172,7 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
     cout << "The initial size of clusters is: " << clusters.size() << endl;
 
 
-    double threshold = 10;
+    double threshold = 2;
     do {
         MinPair minPair = minDistanceAmongAllClusters(clusters);
         if (minPair.distance > threshold) {

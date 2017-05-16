@@ -26,9 +26,7 @@ int main(int argc, char *argv[]) {
 //    data[1] = "c";
 //    cout << data.size() << endl;
 
-    vector<int> s;
-    s[2] = 1;
-    cout << s[2] << endl;
+
 
     return 0;
 }

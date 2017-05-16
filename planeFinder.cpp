@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
+    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/noisyCube_0.1.ply";
     string outputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/output_adzePoints.ply";
 
     // Storage for the point cloud.
