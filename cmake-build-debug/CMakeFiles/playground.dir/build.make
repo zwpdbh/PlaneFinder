@@ -129,28 +129,28 @@ CMakeFiles/playground.dir/rply.c.o.provides: CMakeFiles/playground.dir/rply.c.o.
 CMakeFiles/playground.dir/rply.c.o.provides.build: CMakeFiles/playground.dir/rply.c.o
 
 
-CMakeFiles/playground.dir/Patch.cpp.o: CMakeFiles/playground.dir/flags.make
-CMakeFiles/playground.dir/Patch.cpp.o: ../Patch.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/playground.dir/Patch.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/playground.dir/Patch.cpp.o -c /Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp
+CMakeFiles/playground.dir/Cluster.cpp.o: CMakeFiles/playground.dir/flags.make
+CMakeFiles/playground.dir/Cluster.cpp.o: ../Cluster.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/playground.dir/Cluster.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/playground.dir/Cluster.cpp.o -c /Users/zw/code/C++_Projects/PlaneFinder/Cluster.cpp
 
-CMakeFiles/playground.dir/Patch.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/playground.dir/Patch.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp > CMakeFiles/playground.dir/Patch.cpp.i
+CMakeFiles/playground.dir/Cluster.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/playground.dir/Cluster.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zw/code/C++_Projects/PlaneFinder/Cluster.cpp > CMakeFiles/playground.dir/Cluster.cpp.i
 
-CMakeFiles/playground.dir/Patch.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/playground.dir/Patch.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp -o CMakeFiles/playground.dir/Patch.cpp.s
+CMakeFiles/playground.dir/Cluster.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/playground.dir/Cluster.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zw/code/C++_Projects/PlaneFinder/Cluster.cpp -o CMakeFiles/playground.dir/Cluster.cpp.s
 
-CMakeFiles/playground.dir/Patch.cpp.o.requires:
+CMakeFiles/playground.dir/Cluster.cpp.o.requires:
 
-.PHONY : CMakeFiles/playground.dir/Patch.cpp.o.requires
+.PHONY : CMakeFiles/playground.dir/Cluster.cpp.o.requires
 
-CMakeFiles/playground.dir/Patch.cpp.o.provides: CMakeFiles/playground.dir/Patch.cpp.o.requires
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Patch.cpp.o.provides.build
-.PHONY : CMakeFiles/playground.dir/Patch.cpp.o.provides
+CMakeFiles/playground.dir/Cluster.cpp.o.provides: CMakeFiles/playground.dir/Cluster.cpp.o.requires
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Cluster.cpp.o.provides.build
+.PHONY : CMakeFiles/playground.dir/Cluster.cpp.o.provides
 
-CMakeFiles/playground.dir/Patch.cpp.o.provides.build: CMakeFiles/playground.dir/Patch.cpp.o
+CMakeFiles/playground.dir/Cluster.cpp.o.provides.build: CMakeFiles/playground.dir/Cluster.cpp.o
 
 
 # Object files for target playground
@@ -158,7 +158,7 @@ playground_OBJECTS = \
 "CMakeFiles/playground.dir/playground.cpp.o" \
 "CMakeFiles/playground.dir/SimplePly.cpp.o" \
 "CMakeFiles/playground.dir/rply.c.o" \
-"CMakeFiles/playground.dir/Patch.cpp.o"
+"CMakeFiles/playground.dir/Cluster.cpp.o"
 
 # External object files for target playground
 playground_EXTERNAL_OBJECTS =
@@ -166,7 +166,7 @@ playground_EXTERNAL_OBJECTS =
 playground: CMakeFiles/playground.dir/playground.cpp.o
 playground: CMakeFiles/playground.dir/SimplePly.cpp.o
 playground: CMakeFiles/playground.dir/rply.c.o
-playground: CMakeFiles/playground.dir/Patch.cpp.o
+playground: CMakeFiles/playground.dir/Cluster.cpp.o
 playground: CMakeFiles/playground.dir/build.make
 playground: CMakeFiles/playground.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/zw/code/C++_Projects/PlaneFinder/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable playground"
@@ -180,7 +180,7 @@ CMakeFiles/playground.dir/build: playground
 CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/playground.cpp.o.requires
 CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/SimplePly.cpp.o.requires
 CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/rply.c.o.requires
-CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/Patch.cpp.o.requires
+CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/Cluster.cpp.o.requires
 
 .PHONY : CMakeFiles/playground.dir/requires
 

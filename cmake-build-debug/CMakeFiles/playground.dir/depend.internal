@@ -5,15 +5,15 @@ CMakeFiles/playground.dir/rply.c.o
  /Users/zw/code/C++_Projects/PlaneFinder/rply.c
  /Users/zw/code/C++_Projects/PlaneFinder/rply.h
  /Users/zw/code/C++_Projects/PlaneFinder/rplyfile.h
-CMakeFiles/playground.dir/Patch.cpp.o
- /Users/zw/code/C++_Projects/PlaneFinder/Patch.cpp
- /Users/zw/code/C++_Projects/PlaneFinder/Patch.h
+CMakeFiles/playground.dir/Cluster.cpp.o
+ /Users/zw/code/C++_Projects/PlaneFinder/Cluster.cpp
+ /Users/zw/code/C++_Projects/PlaneFinder/Cluster.h
  /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
 CMakeFiles/playground.dir/SimplePly.cpp.o
  /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp
  /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
  /Users/zw/code/C++_Projects/PlaneFinder/rply.h
 CMakeFiles/playground.dir/playground.cpp.o
- /Users/zw/code/C++_Projects/PlaneFinder/Patch.h
+ /Users/zw/code/C++_Projects/PlaneFinder/Cluster.h
  /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
  /Users/zw/code/C++_Projects/PlaneFinder/playground.cpp

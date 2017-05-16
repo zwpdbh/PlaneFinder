@@ -136,35 +136,35 @@ planeFinder/fast:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/build
 .PHONY : planeFinder/fast
 
-Patch.o: Patch.cpp.o
+Cluster.o: Cluster.cpp.o
 
-.PHONY : Patch.o
+.PHONY : Cluster.o
 
 # target to build an object file
-Patch.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Patch.cpp.o
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Patch.cpp.o
-.PHONY : Patch.cpp.o
+Cluster.cpp.o:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Cluster.cpp.o
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Cluster.cpp.o
+.PHONY : Cluster.cpp.o
 
-Patch.i: Patch.cpp.i
+Cluster.i: Cluster.cpp.i
 
-.PHONY : Patch.i
+.PHONY : Cluster.i
 
 # target to preprocess a source file
-Patch.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Patch.cpp.i
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Patch.cpp.i
-.PHONY : Patch.cpp.i
+Cluster.cpp.i:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Cluster.cpp.i
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Cluster.cpp.i
+.PHONY : Cluster.cpp.i
 
-Patch.s: Patch.cpp.s
+Cluster.s: Cluster.cpp.s
 
-.PHONY : Patch.s
+.PHONY : Cluster.s
 
 # target to generate assembly for a file
-Patch.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Patch.cpp.s
-	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Patch.cpp.s
-.PHONY : Patch.cpp.s
+Cluster.cpp.s:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Cluster.cpp.s
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Cluster.cpp.s
+.PHONY : Cluster.cpp.s
 
 Plane.o: Plane.cpp.o
 
@@ -317,9 +317,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... playground"
 	@echo "... planeFinder"
-	@echo "... Patch.o"
-	@echo "... Patch.i"
-	@echo "... Patch.s"
+	@echo "... Cluster.o"
+	@echo "... Cluster.i"
+	@echo "... Cluster.s"
 	@echo "... Plane.o"
 	@echo "... Plane.i"
 	@echo "... Plane.s"
