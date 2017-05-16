@@ -2,10 +2,13 @@
 // Created by zwpdbh on 15/05/2017.
 //
 
+
+
 #ifndef PLANEFINDER_PCA_H
 #define PLANEFINDER_PCA_H
 
-#include "SimplePly.h"
+
+#include "Plane.h"
 #include <Eigen/Eigenvalues>
 #include <unordered_map>
 
@@ -15,14 +18,7 @@
  * the point index in a Simply.
  */
 class Cluster {
-
 public:
-    /**
-     * constructors
-     */
-    Cluster() {};
-    Cluster(SimplePly &ply, std::vector<long> &points);
-
     // holds the groups of indexes which associated with PlyPoint in Simply
     std::vector<long> points;
 
@@ -34,6 +30,7 @@ public:
     Eigen::Vector3d secondPC;
     Eigen::Vector3d centroid;
 
+
     /**
      * associated eigenvalues and eigenvectors
      */
@@ -41,9 +38,16 @@ public:
     Eigen::EigenSolver<Eigen::Matrix3d>::EigenvectorsType eigenvectors;
 
     /**
+     * constructors
+     */
+    Cluster() {};
+    Cluster(SimplePly &ply, std::vector<long> &points);
+
+    /**
      * agglomerative clustering
      */
     static void agglomerativeClustering(SimplePly &ply);
+
 private:
     /**
      * helper functions

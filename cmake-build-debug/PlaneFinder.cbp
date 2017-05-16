@@ -140,6 +140,12 @@
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/Plane.h">
 			<Option target="planeFinder"/>
 		</Unit>
+		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/RANSAC.cpp">
+			<Option target="planeFinder"/>
+		</Unit>
+		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/RANSAC.h">
+			<Option target="planeFinder"/>
+		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp">
 			<Option target="playground"/>
 			<Option target="planeFinder"/>

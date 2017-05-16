@@ -193,6 +193,33 @@ Plane.cpp.s:
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Plane.cpp.s
 .PHONY : Plane.cpp.s
 
+RANSAC.o: RANSAC.cpp.o
+
+.PHONY : RANSAC.o
+
+# target to build an object file
+RANSAC.cpp.o:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/RANSAC.cpp.o
+.PHONY : RANSAC.cpp.o
+
+RANSAC.i: RANSAC.cpp.i
+
+.PHONY : RANSAC.i
+
+# target to preprocess a source file
+RANSAC.cpp.i:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/RANSAC.cpp.i
+.PHONY : RANSAC.cpp.i
+
+RANSAC.s: RANSAC.cpp.s
+
+.PHONY : RANSAC.s
+
+# target to generate assembly for a file
+RANSAC.cpp.s:
+	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/RANSAC.cpp.s
+.PHONY : RANSAC.cpp.s
+
 SimplePly.o: SimplePly.cpp.o
 
 .PHONY : SimplePly.o
@@ -323,6 +350,9 @@ help:
 	@echo "... Plane.o"
 	@echo "... Plane.i"
 	@echo "... Plane.s"
+	@echo "... RANSAC.o"
+	@echo "... RANSAC.i"
+	@echo "... RANSAC.s"
 	@echo "... SimplePly.o"
 	@echo "... SimplePly.i"
 	@echo "... SimplePly.s"

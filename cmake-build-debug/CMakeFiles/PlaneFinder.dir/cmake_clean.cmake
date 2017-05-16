@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/planeFinder.dir/rply.c.o"
   "CMakeFiles/planeFinder.dir/Plane.cpp.o"
   "CMakeFiles/planeFinder.dir/Cluster.cpp.o"
+  "CMakeFiles/planeFinder.dir/RANSAC.cpp.o"
   "planeFinder.pdb"
   "planeFinder"
 )

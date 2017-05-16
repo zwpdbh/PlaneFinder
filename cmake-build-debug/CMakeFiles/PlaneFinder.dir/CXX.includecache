@@ -11,12 +11,10 @@ Cluster.h
 /Users/zw/code/C++_Projects/PlaneFinder/Cluster.h
 iostream
 -
-unordered_map
--
 
 /Users/zw/code/C++_Projects/PlaneFinder/Cluster.h
-SimplePly.h
-/Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
+Plane.h
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
 Eigen/Eigenvalues
 -
 unordered_map
@@ -33,6 +31,16 @@ SimplePly.h
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.h
 unordered_map
 -
+
+/Users/zw/code/C++_Projects/PlaneFinder/RANSAC.cpp
+RANSAC.h
+/Users/zw/code/C++_Projects/PlaneFinder/RANSAC.h
+iostream
+-
+
+/Users/zw/code/C++_Projects/PlaneFinder/RANSAC.h
+Plane.h
+/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
 
 /Users/zw/code/C++_Projects/PlaneFinder/SimplePly.cpp
 SimplePly.h
@@ -55,8 +63,10 @@ string
 /Users/zw/code/C++_Projects/PlaneFinder/planeFinder.cpp
 iostream
 -
-Plane.h
-/Users/zw/code/C++_Projects/PlaneFinder/Plane.h
+RANSAC.h
+/Users/zw/code/C++_Projects/PlaneFinder/RANSAC.h
+Cluster.h
+/Users/zw/code/C++_Projects/PlaneFinder/Cluster.h
 
 /Users/zw/code/C++_Projects/PlaneFinder/rply.h
 

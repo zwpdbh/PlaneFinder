@@ -17,7 +17,7 @@ add_executable(planeFinder
         rply.h
         rply.c
         Plane.cpp Plane.h
-        Cluster.cpp Cluster.h)
+        Cluster.cpp Cluster.h RANSAC.cpp RANSAC.h)
 
 
 # playground
