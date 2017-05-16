@@ -108,9 +108,10 @@ void Cluster::centerDataAtZero(std::vector<double> *d) {
  * This is computed by comparing the similariy of two pairs of eigenvectors. These two pairs
  * eigenvectors are those contains the most variations (pick the two most variant dimention).
  */
-double dissimilarityBetween(Cluster *c1, Cluster *c2) {
+double dissimilarityBetween(Cluster &c1, Cluster &c2) {
     // compute the difference between their fist and second PCs
-    double distance = pow(acos(c1->firstPC.dot(c1->firstPC)), 2) + pow(acos(c1->secondPC.dot(c2->secondPC)), 2);
+
+    double distance = pow(acos(c1.firstPC.dot(c2.firstPC)), 2) + pow(acos(c1.secondPC.dot(c2.secondPC)), 2);
     return distance;
 }
 
@@ -124,18 +125,24 @@ struct MinPair {
  * compute the min distance among all the pairs of clusters
  * @param clusters a pointer to unordered map
  */
-static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &clusters) {
+static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster> &clusters) {
+    cout << endl;
+    cout << "computing the min distance among clusters, size: " << clusters.size() << endl;
+
     MinPair minPair = {};
     double minDistance = 100000000;
     // compute all pairs of clusters' distance
     unsigned long size = clusters.size();
     for (unsigned long i = 0; i < size; i++) {
-        Cluster *clusterI = clusters[i];
+        Cluster clusterI = clusters[i];
         for (unsigned long j = i + 1; j < size; j++) {
-            Cluster *clusterJ = clusters[j];
+            Cluster clusterJ = clusters[j];
             double currentDistance = dissimilarityBetween(clusterI, clusterJ);
-            cout << "current distance between " << i << " and " << j << " is: " << currentDistance << endl;
-            if (minDistance < currentDistance) {
+            if (currentDistance < minDistance) {
+//                cout << "minDistance = " << minDistance << endl;
+//                cout << "current distance = " << currentDistance << endl;
+//                cout << "\n" << endl;
+
                 minDistance = currentDistance;
                 minPair.distance = minDistance;
                 minPair.i = i;
@@ -143,20 +150,29 @@ static MinPair minDistanceAmongAllClusters(std::unordered_map<long, Cluster *> &
             }
         }
     }
+
+    cout << "The min distance is between: "
+         << minPair.i << " and " << minPair.j
+         << " = " << minPair.distance << endl;
+    cout << endl;
+
     return minPair;
 }
 
 
 
 void Cluster::agglomerativeClustering(SimplePly &ply) {
-    unordered_map<long, Cluster *> clusters;
+    unordered_map<long, Cluster> clusters;
     vector<long> groupOfPoints;
     long c = 0;
+    int count = 0;
+
+    int clusterSize = 500;
 
     for (long i = 0; i < ply.size(); i++) {
-        if (groupOfPoints.size() > 200) {
-            Cluster cluster(ply, groupOfPoints);
-            clusters[c] = &cluster;
+        if (groupOfPoints.size() > clusterSize) {
+            Cluster cluster = Cluster(ply, groupOfPoints);
+            clusters[c] = cluster;
             c += 1;
             groupOfPoints.clear();
         }
@@ -165,38 +181,38 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
 
     cout << "The initial size of clusters is: " << clusters.size() << endl;
 
-    double threshold = 0.02;
+
+    double threshold = 10;
     do {
         MinPair minPair = minDistanceAmongAllClusters(clusters);
-        cout << "The min distance is between: "
-             << minPair.i << " and " << minPair.j
-             << " = " << minPair.distance << endl;
-
-
         if (minPair.distance > threshold) {
             break;
-        } else {
-            Cluster *clusterI = clusters[minPair.i];
-            Cluster *clusterJ = clusters[minPair.j];
-
-            // merge these two cluster
-            vector<long> tmp;
-            for (long each :clusterI->points) {
-                tmp.push_back(each);
-            }
-            for (long each :clusterJ->points) {
-                tmp.push_back(each);
-            }
-
-            // add the merged new cluster
-            Cluster mergedCluster(ply, tmp);
-            clusters[minPair.i] = &mergedCluster;
-
-            // remove the clusters for clusterI and clusterJ
-            clusters.erase(minPair.j);
-            cout << "After merging " << minPair.i << ", " << minPair.j << ", the current clusters' size is: "
-                 << clusters.size() << endl;
         }
+
+        Cluster clusterI = clusters[minPair.i];
+        Cluster clusterJ = clusters[minPair.j];
+
+        // merge these two cluster
+        vector<long> tmp;
+        for (long each :clusterI.points) {
+            tmp.push_back(each);
+        }
+        for (long each :clusterJ.points) {
+            tmp.push_back(each);
+        }
+
+
+        cout << "current clusters size: " << clusters.size() << endl;
+        // remove the clusters for clusterI and clusterJ
+        clusters.erase(minPair.j);
+        clusters.erase(minPair.i);
+        cout << "after deleting two clusters, new size: " << clusters.size() << endl;
+        // add the merged new cluster
+        Cluster mergedCluster(ply, tmp);
+        clusters[minPair.i] = mergedCluster;
+        cout << "After merging " << minPair.i << ", " << minPair.j
+             << ", the current clusters' size is: " << clusters.size() << endl;
+
     } while (true);
 
     cout << "After agglomerative clustering, the size of clusters reduced to : "
@@ -216,16 +232,20 @@ void Cluster::agglomerativeClustering(SimplePly &ply) {
         colours.push_back(Eigen::Vector3i(153, 204, 255));
     }
 
-    int count = 0;
+    count = 0;
     for (auto it = clusters.begin(); it != clusters.end(); it++) {
-        cout << "The " << count + 1 << "th cluster's size = " << it->second->points.size()
-             << "percentage: " << (double) it->second->points.size() / ply.size() << endl;
+        cout << "The " << count + 1 << "th cluster's size = " << it->second.points.size()
+             << " percentage: " << (double) it->second.points.size() / ply.size() << endl;
+
         Eigen::Vector3i colour = colours[count];
-        for (long index: it->second->points) {
+
+        for (long index: it->second.points) {
             ply[index].colour = colour;
         }
         count += 1;
     }
+
+
 }
 
 
