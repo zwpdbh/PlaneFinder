@@ -24,8 +24,12 @@ int main(int argc, char *argv[]) {
 //
 //    RANSAC ransac(10, 0.05, 0.95, 0.99);
 //    ransac.fitPlyPoints(ply);
+    if (ply.size() / 2000 < 100) {
+        Cluster::agglomerativeClustering(ply, ply.size() / 2000);
+    } else {
+        Cluster::agglomerativeClustering(ply, 100);
+    }
 
-    Cluster::agglomerativeClustering(ply, 700);
 
     // Write the resulting (re-coloured) point cloud to a PLY file.
     std::cout << "Writing PLY data to " << outputFile << std::endl;

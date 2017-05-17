@@ -112,7 +112,7 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
         cout << "the current bestInliers' size is: " << bestInliers.size() << endl;
         cout << "Before update data set, the current data set size is: " << dataSet.size() << endl;
 
-        Eigen::Vector3i colour = colours[i];
+        Eigen::Vector3i colour = colours[i % colours.size()];
         for (auto const each: bestInliers) {
             dataSet[each]->colour = colour;
             dataSet.erase(each);

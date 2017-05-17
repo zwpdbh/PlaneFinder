@@ -22,6 +22,7 @@ std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet,
     Eigen::Vector3d v = p2 - p1;
     Eigen::Vector3d norm = u.cross(v);
     Eigen::Vector3d normalized = norm / sqrt(norm.dot(norm));
+    this->normalVector = normalized;
 
     for (auto const &each: dataSet) {
         double d = fabs(normalized.dot(each.second->location - p1));

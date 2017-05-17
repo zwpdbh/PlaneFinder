@@ -179,30 +179,133 @@ static MinPair minDifferencesAmongClusters(std::unordered_map<long, Cluster> &cl
     return minPair;
 }
 
+vector<long> getNextCluster(unordered_map<long, PlyPoint *> &dataSet, int clusterSize) {
+    vector<long> nextCluster;
+    int c = 1;
+    for (auto it = dataSet.begin(); it != dataSet.end(); it++) {
+        if ( c > clusterSize) {
+            break;
+        }
+        nextCluster.push_back(it->first);
+        c++;
+    }
 
+    for (long i: nextCluster) {
+        dataSet.erase(i);
+    }
+    return nextCluster;
+}
+
+
+void printOutClusters(unordered_map<long, Cluster> &clusters) {
+    for (auto it = clusters.begin(); it != clusters.end(); it++) {
+        cout << "cluster: " << it->first << " -> " << it->second.points.size() << endl;
+    }
+}
+
+void mergeClusters(Cluster &currentCluster, unordered_map<long, Cluster> &clusters, SimplePly &ply) {
+    if (clusters.size() == 0) {
+        clusters[0] = currentCluster;
+    } else {
+        // compare with each cluster in the clusters, and pick a most similar one and merge them
+        long key = 0;
+        double minDissimilarity = 10;
+        double threshold = 0.05;
+        for (auto it = clusters.begin(); it != clusters.end(); it++) {
+            double dissimilarity = dissimilarityBetween(it->second, currentCluster);
+
+            if (dissimilarity < minDissimilarity) {
+                cout << "current min dissimilarity is with cluster " << it->first << " = " << dissimilarity << endl;
+                key = it->first;
+                minDissimilarity  = dissimilarity;
+            }
+        }
+
+        if (minDissimilarity < threshold) {
+            // merge these two cluster
+            cout << "dissimilarity is < threshold, merge into clusters.. " << endl;
+            cout << "before merging, the cluster size is: " << clusters.size() << endl;
+            vector<long> tmp;
+            for (long each :clusters[key].points) {
+                tmp.push_back(each);
+            }
+            for (long each :currentCluster.points) {
+                tmp.push_back(each);
+            }
+
+            Cluster mergedOne(ply, tmp);
+            clusters.erase(key);
+            clusters[key] = mergedOne;
+            cout << "after merging, the cluster size is: " << clusters.size() << endl;
+            cout << "\n" << endl;
+        } else {
+            cout << "dissimilarity is > threshold, add into clusters.." << endl;
+            clusters[clusters.size()] = currentCluster;
+            cout << "after adding, the cluster size is: " << clusters.size() << endl;
+            cout << "\n" << endl;
+        }
+
+    }
+}
+
+void preClustering(SimplePly &ply, int clusterSize, unordered_map<long, Cluster> &clusters) {
+    cout << "each initial cluster size: " << clusterSize << endl;
+    long totalSize = ply.size();
+
+    unordered_map<long, PlyPoint *> dataSet;
+    for (long i = 0; i < totalSize; i++) {
+        dataSet[i] = &ply[i];
+    }
+
+
+    // keep get a new cluster for fit.
+    while (true) {
+        vector<long> points = getNextCluster(dataSet, clusterSize);
+        if (points.size() < clusterSize / 2) {
+            break;
+        }
+
+        Cluster currentCluster(ply, points);
+        cout << "preparing merge cluster into clusters ....." << endl;
+        mergeClusters(currentCluster, clusters, ply);
+    }
+
+
+    // change colour
+//    vector<Eigen::Vector3i> colours;
+//    for (int i = 0; i < 8; i++) {
+//        colours.push_back(Eigen::Vector3i(204, 51, 255));
+//        colours.push_back(Eigen::Vector3i(255, 102, 102));
+//        colours.push_back(Eigen::Vector3i(230, 0, 172));
+//        colours.push_back(Eigen::Vector3i(255, 255, 0));
+//        colours.push_back(Eigen::Vector3i(0, 204, 0));
+//        colours.push_back(Eigen::Vector3i(198, 140, 83));
+//        colours.push_back(Eigen::Vector3i(153, 204, 255));
+//    }
+//
+//    int count = 0;
+//
+//    for (auto it = clusters.begin(); it != clusters.end(); it++) {
+//        cout << "The " << count + 1 << "th cluster's size = " << it->second.points.size()
+//             << " percentage: " << (double) it->second.points.size() / ply.size() << endl;
+//
+//        Eigen::Vector3i colour = colours[count % clusters.size()];
+//
+//        for (long index: it->second.points) {
+//            ply[index].colour = colour;
+//        }
+//        count += 1;
+//    }
+
+}
 
 
 void Cluster::agglomerativeClustering(SimplePly &ply, int clusterSize) {
     unordered_map<long, Cluster> clusters;
-    vector<long> groupOfPoints;
-    long c = 0;
-    int count = 0;
 
+    preClustering(ply, clusterSize, clusters);
 
-    for (long i = 0; i < ply.size(); i++) {
-        if (groupOfPoints.size() > clusterSize) {
-            Cluster cluster = Cluster(ply, groupOfPoints);
-            clusters[c] = cluster;
-            c += 1;
-            groupOfPoints.clear();
-        }
-        groupOfPoints.push_back(i);
-    }
-
-    cout << "The initial size of clusters is: " << clusters.size() << endl;
-
-
-    double neighbourDistanceConstraint = 0.02;
+    printOutClusters(clusters);
 
     do {
         MinPair minPair = minDifferencesAmongClusters(clusters, ply);
@@ -249,7 +352,7 @@ void Cluster::agglomerativeClustering(SimplePly &ply, int clusterSize) {
         colours.push_back(Eigen::Vector3i(153, 204, 255));
     }
 
-    count = 0;
+    int count = 0;
 
     for (auto it = clusters.begin(); it != clusters.end(); it++) {
         cout << "The " << count + 1 << "th cluster's size = " << it->second.points.size()
@@ -262,7 +365,6 @@ void Cluster::agglomerativeClustering(SimplePly &ply, int clusterSize) {
         }
         count += 1;
     }
-
 
 }
 
