@@ -15,6 +15,7 @@ public:
     std::vector<long> fitPlane(std::unordered_map<long, PlyPoint *> &dataSet, double threshold);
     std::vector<long> inliers;
     Eigen::Vector3d normalVector;
+    Eigen::Vector3d projectPointOnThisPlane(PlyPoint &p);
 private:
     PlyPoint *p1;
     PlyPoint *p2;

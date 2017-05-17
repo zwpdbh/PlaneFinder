@@ -33,3 +33,8 @@ std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet,
 
     return this->inliers;
 }
+
+Eigen::Vector3d Plane::projectPointOnThisPlane(PlyPoint &p) {
+
+    return Eigen::Vector3d();
+}
