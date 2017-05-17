@@ -27,12 +27,14 @@ std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet,
 
     Eigen::Vector3d p0 = this->p1->location;
     Eigen::Vector3d p1 = this->p2->location;
+    this->pointP = p1;
     Eigen::Vector3d p2 = this->p3->location;
 
     Eigen::Vector3d u = p0 - p1;
     Eigen::Vector3d v = p2 - p1;
     Eigen::Vector3d norm = u.cross(v);
     Eigen::Vector3d normalized = norm / sqrt(norm.dot(norm));
+
     this->normalVector = normalized;
 
     for (auto const &each: dataSet) {
@@ -45,12 +47,12 @@ std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet,
     return this->inliers;
 }
 
+
 /**
- * This method compute the projected 3d position on this plane given a PlyPoint
- * @param p an arbitary point
- * @return the new position which is Eigen::Vector3d
+ * Project an arbitary point p on to this plane
  */
 Eigen::Vector3d Plane::projectPointOnThisPlane(PlyPoint &p) {
-
-    return Eigen::Vector3d();
+    double d = fabs(this->normalVector.dot(p.location - this->pointP));
+    Eigen::Vector3d projectedPoint = p.location - d * this->normalVector;
+    return projectedPoint;
 }

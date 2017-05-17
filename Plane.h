@@ -23,6 +23,12 @@ public:
     // my inner data structures
     std::vector<long> inliers;
     Eigen::Vector3d normalVector;
+    Eigen::Vector3d pointP;
+
+    /**
+     * Project an arbitary point p on to this plane
+     */
+    Eigen::Vector3d pointProjectedOnThisPlane;
 
 private:
     // my inner data structures
