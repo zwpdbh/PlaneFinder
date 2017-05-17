@@ -19,6 +19,11 @@
  */
 class Cluster {
 public:
+    // threshold for differences between eigenvectors
+    static const double eigenvectorDifferences;
+    // threshold on the neighbour constraint
+    static const double neighbourConstraint;
+
     // holds the groups of indexes which associated with PlyPoint in Simply
     std::vector<long> points;
 
@@ -28,7 +33,6 @@ public:
     Eigen::Matrix3d cov;
     Eigen::Vector3d firstPC;
     Eigen::Vector3d secondPC;
-    Eigen::Vector3d centroid;
 
 
     /**
@@ -37,16 +41,12 @@ public:
     Eigen::EigenSolver<Eigen::Matrix3d>::EigenvalueType  eigenvalues;
     Eigen::EigenSolver<Eigen::Matrix3d>::EigenvectorsType eigenvectors;
 
-    /**
-     * constructors
-     */
+
     Cluster() {};
     Cluster(SimplePly &ply, std::vector<long> &points);
 
-    /**
-     * agglomerative clustering
-     */
-    static void agglomerativeClustering(SimplePly &ply);
+    // agglomerative clustering
+    static void agglomerativeClustering(SimplePly &ply, int clusterSize);
 
 private:
     /**

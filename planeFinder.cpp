@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/noisyCube_0.1.ply";
+    string inputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/adzePoints.ply";
     string outputFile = "/Users/zw/code/C++_Projects/PlaneFinder/data/output_adzePoints.ply";
 
     // Storage for the point cloud.
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 //    RANSAC ransac(10, 0.05, 0.95, 0.99);
 //    ransac.fitPlyPoints(ply);
 
-    Cluster::agglomerativeClustering(ply);
+    Cluster::agglomerativeClustering(ply, 700);
 
     // Write the resulting (re-coloured) point cloud to a PLY file.
     std::cout << "Writing PLY data to " << outputFile << std::endl;
