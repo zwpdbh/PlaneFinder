@@ -18,7 +18,14 @@ public:
     double expectedOutlierRatio;
     double expectedSuccessfulRate;
 
+    /**
+     * my constructor
+     */
     RANSAC(int nPlanes, double threshold, double expectedOutlierRatio, double expectedSuccessfulRate);
+
+    /**
+     * call this method to use RANSAC to fit planes in the Simply with initialized parameters
+     */
     void fitPlyPoints(SimplePly &ply);
 };
 

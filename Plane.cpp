@@ -6,12 +6,23 @@
 #include "Plane.h"
 #include <Eigen/Dense>
 
+
+/**
+ * Plane use 3 PlyPoints to construct .
+ */
 Plane::Plane(PlyPoint *p1, PlyPoint *p2, PlyPoint *p3) {
     this->p1 = p1;
     this->p2 = p2;
     this->p3 = p3;
 }
 
+
+/**
+ * use this plane to fit a cloud of PlyPoints
+ * @param dataSet it is an unordered map, used for storing the clould of PlyPoints
+ * @param threshold it is the distance from a point in dataSet to this plane
+ * @return std::vector<long> return the fitted PlyPoints' indexes as a vector<long>
+ */
 std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet, double threshold) {
 
     Eigen::Vector3d p0 = this->p1->location;
@@ -34,6 +45,11 @@ std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet,
     return this->inliers;
 }
 
+/**
+ * This method compute the projected 3d position on this plane given a PlyPoint
+ * @param p an arbitary point
+ * @return the new position which is Eigen::Vector3d
+ */
 Eigen::Vector3d Plane::projectPointOnThisPlane(PlyPoint &p) {
 
     return Eigen::Vector3d();

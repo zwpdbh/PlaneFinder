@@ -7,10 +7,21 @@
 
 using namespace std;
 
+/**
+ * Helper function, update the number of trials based on parameters
+ * @param successfulRate is the probability of success
+ * @param outlierRatio is the proortion of outlier / current data set
+ * @param minNumOfSampleNeeded will be set to 3 which means use 3 samples to represent my model which is a plane
+ * @return the updated number of trials
+ */
 int updateNumOfTrials(double successfulRate, double outlierRatio, int minNumOfSampleNeeded) {
     return (int) (log(1 - successfulRate) / log(1 - pow((1 - outlierRatio), minNumOfSampleNeeded)));
 }
 
+/**
+ * get a 3 random points for forming the random plane from data set
+ * @param dataSet randomly pick 3 points from this data Set
+ */
 vector<PlyPoint *> getRandomPoints(unordered_map<long, PlyPoint *> *dataSet) {
     vector<PlyPoint *> randomPoints;
 
@@ -31,7 +42,15 @@ vector<PlyPoint *> getRandomPoints(unordered_map<long, PlyPoint *> *dataSet) {
     return randomPoints;
 }
 
-
+/**
+ * constructor
+ * @param nPlanes specify the number of planes to fit
+ * @param threshold test the distance from a point to this plane, if the distance is smaller
+ *  than this threshold, it will be considered as inliers of this plane
+ * @param expectedOutlierRatio it represent the number of outliers in the data set, it will be updated in the process
+ *  of different trials
+ * @param expectedSuccessfulRate the probability of expected successuful rate
+ */
 RANSAC::RANSAC(int nPlanes, double threshold, double expectedOutlierRatio, double expectedSuccessfulRate) {
     this->nPlanes = nPlanes;
     this->threshold = threshold;
@@ -40,8 +59,15 @@ RANSAC::RANSAC(int nPlanes, double threshold, double expectedOutlierRatio, doubl
 
 }
 
+
+/**
+ * RANSAC fitting function, use RANSAC to fit some planes in the SimplePly data set with
+ * parameters initialized during initialization
+ * @param ply the data Set.
+ */
 void RANSAC::fitPlyPoints(SimplePly &ply) {
 
+    // get the initial number of trials based on parameters
     int nTrials = (int) (log(1 - this->expectedSuccessfulRate) / log(1 - pow((1 - this->expectedOutlierRatio), 3)));
 
     std::cout << "Searching for " << this->nPlanes << " planes" << std::endl;
@@ -59,6 +85,7 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
         dataSet[i] = &ply[i];
     }
 
+    // create different colours for
     vector<Eigen::Vector3i> colours;
     for (int i = 0; i < 8; i++) {
         colours.push_back(Eigen::Vector3i(204, 51, 255));
@@ -70,12 +97,23 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
         colours.push_back(Eigen::Vector3i(153, 204, 255));
     }
 
+
+    // planes will hold the fitted planes
     vector<Plane> planes;
 
     int i = 0;
-    while ((double) fittedSize / totalSize < 0.95 || i < nPlanes) {
+
+    // the fitting process will be stopped when either:
+    // the founded total planes' points / total points >= 0.95
+    // or when the number of fitted plane is > specified nPlanes
+    while ((double) fittedSize / totalSize < 0.95 && i < nPlanes) {
+        // hold the best results which is the fitted points
         vector<long> bestInliers;
+
+        // hold the best plane
         Plane bestPlane;
+
+        // the number of trials for fitting one plane
         nTrials = updateNumOfTrials(this->expectedSuccessfulRate, this->expectedOutlierRatio, 3);
         cout << endl;
         cout << "try to fit the " << i + 1 << "th plane..." << endl;
@@ -89,14 +127,17 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
             Plane currentPlane(randomPoints[0], randomPoints[1], randomPoints[2]);
             vector<long> currentInliers = currentPlane.fitPlane(dataSet, this->threshold);
 
+            // 2. update fitting results when it is better than the current one.
             if (currentInliers.size() > bestInliers.size()) {
                 bestInliers = currentInliers;
                 bestPlane = currentPlane;
 
+                // compute the outlier ratio based on the fitting result
                 double inlierRatio = (double) bestInliers.size() / dataSet.size();
                 double updatedOutlierRatio = 1 - inlierRatio;
                 cout << "" << endl;
                 cout << "update best plane evaluation: " << inlierRatio << endl;
+                // update the number of trials each time we find a better inlierRatio
                 nTrials = updateNumOfTrials(this->expectedSuccessfulRate, updatedOutlierRatio, 3);
                 cout << "update outlier ratio: " << updatedOutlierRatio << endl;
                 cout << "Update nTrials to: " << nTrials << endl;
@@ -104,6 +145,7 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
 
         }
 
+        // after those trials, save the fitted plane into planes
         planes.push_back(bestPlane);
         i += 1;
         fittedSize += bestPlane.inliers.size();
