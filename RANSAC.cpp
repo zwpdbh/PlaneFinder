@@ -124,7 +124,7 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
             // 1. randomly take 3 points as my plane model
             vector<PlyPoint *> randomPoints = getRandomPoints(&dataSet);
 
-            Plane currentPlane(randomPoints[0], randomPoints[1], randomPoints[2]);
+            Plane currentPlane(randomPoints[0]->location, randomPoints[1]->location, randomPoints[2]->location);
             vector<long> currentInliers = currentPlane.fitPlane(dataSet, this->threshold);
 
             // 2. update fitting results when it is better than the current one.
@@ -155,6 +155,7 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
         cout << "Before update data set, the current data set size is: " << dataSet.size() << endl;
 
         Eigen::Vector3i colour = colours[i % colours.size()];
+        cout << "size of best inliers: " << bestInliers.size() << endl;
         for (auto const each: bestInliers) {
             dataSet[each]->colour = colour;
             dataSet.erase(each);
@@ -162,6 +163,14 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
         cout << "Fitted " << (double) fittedSize / totalSize << " of total points" << endl;
         cout << "After update data set, the rest data set size is: " << dataSet.size() << endl;
     } // end of RANSAC fitting
+
+
+//    for (Plane plane: planes) {
+//        for (long index: plane.inliers) {
+//            Eigen::Vector3d p = ply[index].location;
+//            ply[index].location = plane.projectPointOnThisPlane(p);
+//        }
+//    }
 
     // summary
     cout << endl;

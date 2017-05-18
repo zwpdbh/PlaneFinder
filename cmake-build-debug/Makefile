@@ -172,6 +172,7 @@ Plane.o: Plane.cpp.o
 
 # target to build an object file
 Plane.cpp.o:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Plane.cpp.o
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Plane.cpp.o
 .PHONY : Plane.cpp.o
 
@@ -181,6 +182,7 @@ Plane.i: Plane.cpp.i
 
 # target to preprocess a source file
 Plane.cpp.i:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Plane.cpp.i
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Plane.cpp.i
 .PHONY : Plane.cpp.i
 
@@ -190,6 +192,7 @@ Plane.s: Plane.cpp.s
 
 # target to generate assembly for a file
 Plane.cpp.s:
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Plane.cpp.s
 	$(MAKE) -f CMakeFiles/planeFinder.dir/build.make CMakeFiles/planeFinder.dir/Plane.cpp.s
 .PHONY : Plane.cpp.s
 

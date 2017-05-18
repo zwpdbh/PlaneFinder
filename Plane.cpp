@@ -10,10 +10,14 @@
 /**
  * Plane use 3 PlyPoints to construct .
  */
-Plane::Plane(PlyPoint *p1, PlyPoint *p2, PlyPoint *p3) {
+Plane::Plane(Eigen::Vector3d p1, Eigen::Vector3d p2, Eigen::Vector3d p3) {
     this->p1 = p1;
     this->p2 = p2;
     this->p3 = p3;
+    this->u = this->p1 - this->p2;
+    this->v = this->p3 - this->p2;
+    Eigen::Vector3d norm = u.cross(v);
+    this->normalVector = norm / sqrt(norm.dot(norm));
 }
 
 
@@ -24,21 +28,8 @@ Plane::Plane(PlyPoint *p1, PlyPoint *p2, PlyPoint *p3) {
  * @return std::vector<long> return the fitted PlyPoints' indexes as a vector<long>
  */
 std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet, double threshold) {
-
-    Eigen::Vector3d p0 = this->p1->location;
-    Eigen::Vector3d p1 = this->p2->location;
-    this->pointP = p1;
-    Eigen::Vector3d p2 = this->p3->location;
-
-    Eigen::Vector3d u = p0 - p1;
-    Eigen::Vector3d v = p2 - p1;
-    Eigen::Vector3d norm = u.cross(v);
-    Eigen::Vector3d normalized = norm / sqrt(norm.dot(norm));
-
-    this->normalVector = normalized;
-
     for (auto const &each: dataSet) {
-        double d = fabs(normalized.dot(each.second->location - p1));
+        double d = fabs(this->normalVector.dot(each.second->location - this->p2));
         if (d < threshold) {
             this->inliers.push_back(each.first);
         }
@@ -51,8 +42,8 @@ std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet,
 /**
  * Project an arbitary point p on to this plane
  */
-Eigen::Vector3d Plane::projectPointOnThisPlane(PlyPoint &p) {
-    double d = fabs(this->normalVector.dot(p.location - this->pointP));
-    Eigen::Vector3d projectedPoint = p.location - d * this->normalVector;
+Eigen::Vector3d Plane::projectPointOnThisPlane(Eigen::Vector3d p) {
+    double d = fabs(this->normalVector.dot(p - this->p2));
+    Eigen::Vector3d projectedPoint = p - d * this->normalVector;
     return projectedPoint;
 }

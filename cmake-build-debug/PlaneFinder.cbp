@@ -135,9 +135,11 @@
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/Plane.cpp">
+			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/Plane.h">
+			<Option target="playground"/>
 			<Option target="planeFinder"/>
 		</Unit>
 		<Unit filename="/Users/zw/code/C++_Projects/PlaneFinder/RANSAC.cpp">

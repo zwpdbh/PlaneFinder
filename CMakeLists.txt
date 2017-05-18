@@ -25,4 +25,4 @@ add_executable(playground playground.cpp SimplePly.h
         SimplePly.cpp
         rply.h
         rply.c
-        Cluster.cpp Cluster.h)
+        Cluster.cpp Cluster.h Plane.cpp Plane.h)

@@ -12,29 +12,33 @@ class Plane {
 public:
     // constructors
     Plane(){}
-    Plane(PlyPoint *p1, PlyPoint *p2, PlyPoint *p3);
+    Plane(Eigen::Vector3d p1, Eigen::Vector3d p2, Eigen::Vector3d p3);
 
-    // method to use this plane to fit the given data points
+    // use this plane to fit the given data points
     std::vector<long> fitPlane(std::unordered_map<long, PlyPoint *> &dataSet, double threshold);
 
-    // method to get the location of projecting a point on this plane
-    Eigen::Vector3d projectPointOnThisPlane(PlyPoint &p);
+    // get the location of a point after projecting it onto this plane
+    Eigen::Vector3d projectPointOnThisPlane(Eigen::Vector3d p);
 
     // my inner data structures
     std::vector<long> inliers;
-    Eigen::Vector3d normalVector;
-    Eigen::Vector3d pointP;
 
-    /**
-     * Project an arbitary point p on to this plane
-     */
-    Eigen::Vector3d pointProjectedOnThisPlane;
+
+    Eigen::Vector3d normalVector;
 
 private:
     // my inner data structures
-    PlyPoint *p1;
-    PlyPoint *p2;
-    PlyPoint *p3;
+    Eigen::Vector3d p1;
+    Eigen::Vector3d p2;
+    Eigen::Vector3d p3;
+    
+    Eigen::Vector3d u;
+    Eigen::Vector3d v;
+
+
+//    PlyPoint *p1;
+//    PlyPoint *p2;
+//    PlyPoint *p3;
 };
 
 

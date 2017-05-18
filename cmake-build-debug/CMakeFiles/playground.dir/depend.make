@@ -10,6 +10,10 @@ CMakeFiles/playground.dir/Cluster.cpp.o: ../Cluster.h
 CMakeFiles/playground.dir/Cluster.cpp.o: ../Plane.h
 CMakeFiles/playground.dir/Cluster.cpp.o: ../SimplePly.h
 
+CMakeFiles/playground.dir/Plane.cpp.o: ../Plane.cpp
+CMakeFiles/playground.dir/Plane.cpp.o: ../Plane.h
+CMakeFiles/playground.dir/Plane.cpp.o: ../SimplePly.h
+
 CMakeFiles/playground.dir/SimplePly.cpp.o: ../SimplePly.cpp
 CMakeFiles/playground.dir/SimplePly.cpp.o: ../SimplePly.h
 CMakeFiles/playground.dir/SimplePly.cpp.o: ../rply.h
