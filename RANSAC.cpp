@@ -165,12 +165,12 @@ void RANSAC::fitPlyPoints(SimplePly &ply) {
     } // end of RANSAC fitting
 
 
-//    for (Plane plane: planes) {
-//        for (long index: plane.inliers) {
-//            Eigen::Vector3d p = ply[index].location;
-//            ply[index].location = plane.projectPointOnThisPlane(p);
-//        }
-//    }
+    for (Plane plane: planes) {
+        for (long index: plane.inliers) {
+            Eigen::Vector3d p = ply[index].location;
+            ply[index].location = plane.projectPointOnThisPlane(p);
+        }
+    }
 
     // summary
     cout << endl;

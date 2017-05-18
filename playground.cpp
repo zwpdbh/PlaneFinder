@@ -34,14 +34,17 @@ int main(int argc, char *argv[]) {
     Eigen::Vector3d p3(0, 1, 0);
 
     Plane plane(p1, p2, p3);
+    cout << "the normal vector of plane is: " << endl;
     cout << plane.normalVector << endl;
 
-    Eigen::Vector3d p0(-4, -5, -6);
+    Eigen::Vector3d p0(4, 5, -6);
+    cout << "the distance from point (4, 5, -6) to plane is: " << plane.distanceFromPointToThisPlane(p0) << endl;
     cout << "after projecting the point on the plane, the point is: " << endl;
     cout << plane.projectPointOnThisPlane(p0) << endl;
 
 
     Eigen::Vector3d p5(4, 5, 6);
+    cout << "the distance from point (4, 5, 6) to plane is: " << plane.distanceFromPointToThisPlane(p5) << endl;
     cout << "after projecting the point on the plane, the point is: " << endl;
     cout << plane.projectPointOnThisPlane(p5) << endl;
     return 0;

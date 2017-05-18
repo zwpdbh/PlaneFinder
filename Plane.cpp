@@ -22,6 +22,13 @@ Plane::Plane(Eigen::Vector3d p1, Eigen::Vector3d p2, Eigen::Vector3d p3) {
 
 
 /**
+ * compute the distance from point to plane
+ */
+double Plane::distanceFromPointToThisPlane(Eigen::Vector3d p) {
+    return fabs(this->normalVector.dot(p - this->p2));
+}
+
+/**
  * use this plane to fit a cloud of PlyPoints
  * @param dataSet it is an unordered map, used for storing the clould of PlyPoints
  * @param threshold it is the distance from a point in dataSet to this plane
@@ -29,7 +36,7 @@ Plane::Plane(Eigen::Vector3d p1, Eigen::Vector3d p2, Eigen::Vector3d p3) {
  */
 std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet, double threshold) {
     for (auto const &each: dataSet) {
-        double d = fabs(this->normalVector.dot(each.second->location - this->p2));
+        double d = distanceFromPointToThisPlane(each.second->location);
         if (d < threshold) {
             this->inliers.push_back(each.first);
         }
@@ -38,12 +45,9 @@ std::vector<long> Plane::fitPlane(std::unordered_map<long, PlyPoint *> &dataSet,
     return this->inliers;
 }
 
-
 /**
  * Project an arbitary point p on to this plane
  */
 Eigen::Vector3d Plane::projectPointOnThisPlane(Eigen::Vector3d p) {
-    double d = fabs(this->normalVector.dot(p - this->p2));
-    Eigen::Vector3d projectedPoint = p - d * this->normalVector;
-    return projectedPoint;
+    return p - this->normalVector.dot(p - this->p2) * this->normalVector;
 }

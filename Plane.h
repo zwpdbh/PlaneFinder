@@ -20,6 +20,9 @@ public:
     // get the location of a point after projecting it onto this plane
     Eigen::Vector3d projectPointOnThisPlane(Eigen::Vector3d p);
 
+    // compute the distance from point to plane
+    double distanceFromPointToThisPlane(Eigen::Vector3d p);
+
     // my inner data structures
     std::vector<long> inliers;
 
@@ -31,7 +34,7 @@ private:
     Eigen::Vector3d p1;
     Eigen::Vector3d p2;
     Eigen::Vector3d p3;
-    
+
     Eigen::Vector3d u;
     Eigen::Vector3d v;
 
